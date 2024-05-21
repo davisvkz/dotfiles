@@ -11,6 +11,8 @@ bspc config split_ratio          0.52
 bspc config borderless_monocle   true
 bspc config gapless_monocle      true
 
+polybar-msg cmd toggle; bspc config top_padding +0
+
 #AutoStart applications
 mpDris2 &
 picom --config $HOME/.config/picom/picom.conf &
