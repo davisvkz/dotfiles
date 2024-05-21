@@ -123,21 +123,31 @@ label-unmounted-foreground = ${colors.foreground-alt}
 [module/bspwm]
 type = internal/bspwm
 
-label-focused = %index%
+ws-icon-0 = web;󰈹
+ws-icon-1 = code;
+ws-icon-2 = game;
+ws-icon-3 = editor;
+ws-icon-4 = files;
+ws-icon-5 = chat;󰭹
+ws-icon-6 = music;󰝚
+ws-icon-7 = misc;
+ws-icon-default = ♟
+
+label-focused = %icon%
 label-focused-background = ${colors.background-alt}
 label-focused-underline= ${colors.primary}
-label-focused-padding = 2
+label-focused-padding = 1
 
-label-occupied = %index%
-label-occupied-padding = 2
+label-occupied = %icon%
+label-occupied-padding = 1
 
-label-urgent = %index%!
+label-urgent = %icon%!
 label-urgent-background = ${colors.alert}
-label-urgent-padding = 2
+label-urgent-padding = 1
 
-label-empty = %index%
+label-empty = %icon%
 label-empty-foreground = ${colors.foreground-alt}
-label-empty-padding = 2
+label-empty-padding = 1
 
 ; Separator in between workspaces
 ; label-separator = |
