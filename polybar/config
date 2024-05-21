@@ -68,7 +68,7 @@ font-1 = Fira Code Nerd Font Mono:style=Solid:size=20;2.5
 
 modules-left = bspwm i3
 modules-center = mpd
-modules-right = xbacklight memory cpu wlan eth battery date powermenu
+modules-right = eth memory cpu wlan temperature battery date
 
 tray-position = right
 tray-padding = 2
