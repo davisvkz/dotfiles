@@ -2,7 +2,9 @@
 
 pgrep -x sxhkd > /dev/null || sxhkd &
 
-bspc monitor -d I II III IV V VI VII VIII IX X
+xrandr | awk '{if($2=="connected"){i++1;m[i]=$1}if($2=="disconnected"){x+=1;v[x]=$1}}END{for(i in m){if(i==1)o="xrandr --output "m[i]" --auto --primary ";else o=o"--output "m[i]" --auto --right-of "m[(i-1)]" "}for(i in v){o=o"--output "v[i]" --off "}system(o)}'
+xrandr | awk '{if($2=="connected"){i++1;m[i]=$1}}END{for(i in m){system("bspc monitor "m[i]" -d code web game editor files chat music misc")}}'
+xrandr | awk 'BEGIN{while("bspc query -M --names"|getline v){i++;m[i]=v}}{for (i in m){if($2=="disconnected"&&$1==m[i]){system("bspc monitor "m[i]" -r")}}}'
 
 bspc config border_width 2
 bspc config window_gap 2
