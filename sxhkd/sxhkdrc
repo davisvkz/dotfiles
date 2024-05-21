@@ -10,6 +10,10 @@ super + Return
 super + d
 	dmenu_run
 
+# polybar toggle
+super + {_, shift +} r
+	ps aux | awk 'BEGIN\{"bspc query -M -m focused --names"|getline monitor;while("bspc query -M --names"|getline i)\{m=m"\n"i\}split(m,ar1,"\n");m=""\}/polybar/\{if($11=="polybar")\{m=m"\n"$2\}\}END\{split(m,ar2,"\n");for (i in ar1)\{if (ar1[i]==monitor)\{system("{bspc config -m focused top_padding 35 && polybar-msg -p "ar2[i]" cmd show,bspc config -m focused top_padding 0 && polybar-msg -p "ar2[i]" cmd hide}")\}\}\}'
+
 # make sxhkd reload its configuration files:
 super + Escape
 	pkill -USR1 -x sxhkd
