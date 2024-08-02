@@ -1,3 +1,6 @@
 return {
-	'jbyuki/instant.nvim'
+	'jbyuki/instant.nvim',
+	config = function()
+		vim.g.instant_username = "dv"
+	end
 }
