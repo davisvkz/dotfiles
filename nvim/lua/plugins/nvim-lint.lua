@@ -1,6 +1,9 @@
 return {
 	'mfussenegger/nvim-lint',
 	opts = {
+		python = { 'pylint' },
+		typescript = { 'eslint_d' },
+		javascript = { 'eslint' }
 	},
 	config = function(_, opts)
 		require('lint').linters_by_ft = opts
