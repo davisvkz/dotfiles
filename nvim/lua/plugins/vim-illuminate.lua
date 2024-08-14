@@ -53,5 +53,8 @@ return {
 		should_enable = function(bufnr) return true end,
 		-- case_insensitive_regex: sets regex case sensitivity
 		case_insensitive_regex = false,
-	}
+	},
+	config = function(_,opts)
+		require('illuminate').configure(opts)
+	end
 }
