@@ -23,7 +23,14 @@ return {
 		automatic_installation = false,
 
 		-- See below on usage
-		handlers = nil,
+		handlers = {
+			function(config)
+				-- all sources with no handler get passed here
+
+				-- Keep original functionality
+				require('mason-nvim-dap').default_setup(config)
+			end
+		}
 	},
 	config = function(_,opts)
 		require("mason").setup()
