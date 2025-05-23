@@ -29,11 +29,12 @@ return {
 
 				-- Keep original functionality
 				require('mason-nvim-dap').default_setup(config)
-			end
+			end,
 		}
 	},
 	config = function(_,opts)
 		require("mason").setup()
 		require("mason-nvim-dap").setup(opts)
+		require("neodev").setup({library = { plugins = { "nvim-dap-ui" }, types = true },})
 	end
 }

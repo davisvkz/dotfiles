@@ -27,11 +27,22 @@ return {
 			disable = { "c", "rust" },
 			-- Or use a function for more flexibility, e.g. to disable slow treesitter highlight for large files
 			disable = function(lang, buf)
-					local max_filesize = 100 * 1024 -- 100 KB
-					local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-					if ok and stats and stats.size > max_filesize then
-							return true
+				-- File size limit (100 KB)
+				local max_filesize = 100 * 1024 -- 100 KB
+				local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+				if ok and stats and stats.size > max_filesize then
+					return true
+				end
+
+				-- Long line check (e.g., 500 characters)
+				local max_line_length = 500
+				for _, line in ipairs(vim.api.nvim_buf_get_lines(buf, 0, -1, false)) do
+					if #line > max_line_length then
+						return true
 					end
+				end
+
+				return false
 			end,
 
 			-- Setting this to true will run `:h syntax` and tree-sitter at the same time.
