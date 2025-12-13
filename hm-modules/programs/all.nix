@@ -153,5 +153,7 @@
 		android-translation-layer
 		docker-compose
 		zoxide
+		supabase-cli
+		bmon
 	];
 }

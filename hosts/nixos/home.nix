@@ -99,7 +99,6 @@ in {
 			(exts: with exts; [pass-otp pass-import pass-audit]);
 	};
 	services.pass-secret-service = {
-		inherit storePath;
 		enable = true;
 	};
 	programs.git = {
