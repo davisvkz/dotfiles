@@ -15,7 +15,7 @@
 		mpdris2
 		nodejs
 		pnpm
-		(lua5_1.withPackages (ps: with ps; [luarocks]))
+		(lua5_3.withPackages (ps: with ps; [luarocks]))
 		ueberzugpp
 		pavucontrol
 		btop
@@ -85,7 +85,7 @@
 		hydralauncher
 		xfce.thunar
 		vscodium
-		ffmpeg
+		ffmpeg-full
 		libsodium
 		node-gyp
 		alsa-lib
@@ -155,5 +155,11 @@
 		zoxide
 		supabase-cli
 		bmon
+		atlauncher
+		uv
+		jdk25
+		yt-dlp
+		ccemux
+#		craftos-pc
 	];
 }

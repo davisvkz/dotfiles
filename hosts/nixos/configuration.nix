@@ -1,18 +1,14 @@
 {pkgs, ...}: {
 	services.logind.lidSwitch = "ignore";
-	programs.criu.enable = true;
-	security.wrappers.criu = {
-		source = "${pkgs.criu}/bin/criu";
-		capabilities = "cap_checkpoint_restore+ep";
-		owner = "davisvkz";
-		group = "users";
-		permissions = "0755";
-	};
-	services.pcscd.enable = true;
 	services.picom = {
 		enable = true;
 		backend = "glx";
 	};
+	  programs.nix-ld.enable = true;
+
+  programs.nix-ld.libraries = with pkgs; [
+	nodejs
+  ];
 	programs.light.enable = true;
 	programs.gnupg.agent = {
 		enable = true;
@@ -50,9 +46,6 @@
 		};
 	};
 
-	programs.nix-ld.enable = true;
-
-	programs.nix-ld.libraries = with pkgs; [nodejs];
 	programs.mtr.enable = true;
 	fonts.fontconfig.defaultFonts = {
 		sansSerif = ["Noto Sans CJK SC" "Noto Color Emoji" "Fira Code Nerd Font"];
@@ -86,7 +79,6 @@
 
 	boot.loader.systemd-boot.enable = true;
 	boot.loader.efi.canTouchEfiVariables = true;
-	boot.binfmt.emulatedSystems = ["wasm32-wasi" "x86_64-windows" "aarch64-linux"];
 
 	networking.hostName = "nixos";
 	networking.networkmanager.enable = true;
