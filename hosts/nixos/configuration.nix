@@ -146,4 +146,5 @@
 
 	system.stateVersion = "25.05";
 	networking.firewall.enable = false;
+
 }

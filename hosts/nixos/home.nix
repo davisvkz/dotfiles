@@ -109,7 +109,12 @@ in {
 			name = "davisvkz";
 		};
 	};
-	programs.gh = {enable = true;};
+	programs.gh = {
+		enable = true;
+		gitCredentialHelper = {
+			enable = true;
+		};
+	};
 	programs.neovim = {
 		enable = true;
 		extraLuaPackages = ps: [ps.magick];

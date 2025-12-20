@@ -160,6 +160,13 @@
 		jdk25
 		yt-dlp
 		ccemux
-#		craftos-pc
+		(lib.lowPrio craftos-pc)
+		w3m
+
+		gcc
+		libgcc
+		gnumake
+		cmake
+		extra-cmake-modules
 	];
 }
