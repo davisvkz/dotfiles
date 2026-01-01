@@ -1,3 +1,10 @@
+# pnpm
+export PNPM_HOME="/home/davisvkz/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
 # Path to your oh-my-zsh installation.
 export ZSH="$XDG_CONFIG_HOME/omz"
 
@@ -92,11 +99,6 @@ source <(fzf --zsh)
 [ -d "$XDG_CACHE_HOME"/zsh ] || mkdir -p "$XDG_CACHE_HOME"/zsh
 zstyle ':completion:*' cache-path "$XDG_CACHE_HOME"/zsh/zcompcache
 compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-$ZSH_VERSION
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
 
 # ZOXIDE
 # shellcheck shell=bash
@@ -249,12 +251,4 @@ fi
 #
 # eval "$(zoxide init zsh)"
 #
-# pnpm
-export PNPM_HOME="/home/davisvkz/.local/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
-export PATH="/home/davisvkz/.config/opencode/bin:$PATH"
 export PATH="/home/davisvkz/.local/share/cargo/bin:$PATH"

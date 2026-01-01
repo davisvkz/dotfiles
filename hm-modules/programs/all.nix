@@ -15,7 +15,9 @@
 		mpdris2
 		nodejs
 		pnpm
-		(lua5_3.withPackages (ps: with ps; [luarocks]))
+		bun
+		deno
+		(lua5_1.withPackages (ps: with ps; [luarocks]))
 		ueberzugpp
 		pavucontrol
 		btop
@@ -162,11 +164,18 @@
 		ccemux
 		(lib.lowPrio craftos-pc)
 		w3m
+		vencord
 
 		gcc
 		libgcc
 		gnumake
 		cmake
 		extra-cmake-modules
+		go
+		calibre
+		google-chrome
+		pandoc
+		tectonic
+		lsof
 	];
 }
