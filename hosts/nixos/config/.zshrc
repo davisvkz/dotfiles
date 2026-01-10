@@ -252,3 +252,4 @@ fi
 # eval "$(zoxide init zsh)"
 #
 export PATH="/home/davisvkz/.local/share/cargo/bin:$PATH"
+export PATH="$HOME/.local/share/go/bin:$PATH"

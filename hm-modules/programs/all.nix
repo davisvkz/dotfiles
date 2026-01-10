@@ -8,6 +8,7 @@
 		ldb
 		termdbms
 		kdePackages.dolphin
+		kdePackages.kdeconnect-kde
 		lf
 		wezterm
 		rofi
@@ -124,7 +125,6 @@
 		btop
 		insomnia
 		deno
-		gallery-dl
 		imagemagick
 		cmake
 		gitkraken
@@ -160,11 +160,10 @@
 		atlauncher
 		uv
 		jdk25
-		yt-dlp
 		ccemux
 		(lib.lowPrio craftos-pc)
 		w3m
-		vencord
+		vesktop
 
 		gcc
 		libgcc
@@ -177,5 +176,9 @@
 		pandoc
 		tectonic
 		lsof
+		python3Packages.pygobject3
+		plantuml-c4
+		pandoc
+		pandoc-plantuml-filter
 	];
 }

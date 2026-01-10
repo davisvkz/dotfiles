@@ -48,10 +48,10 @@
 
 	programs.mtr.enable = true;
 	fonts.fontconfig.defaultFonts = {
-		sansSerif = ["Noto Sans CJK SC" "Noto Color Emoji" "Fira Code Nerd Font"];
-		serif = ["Merriweather" "Fira Code Nerd Font" "Noto Color Emoji"];
-		monospace = ["Fira Code Nerd Font" "Noto Color Emoji"];
-		emoji = ["Noto Color Emoji"];
+		sansSerif = ["Noto Sans CJK SC" "Noto Color Emoji" "Fira Code Nerd Font" "Material Design Icons Desktop"];
+		serif = ["Merriweather" "Fira Code Nerd Font" "Noto Color Emoji" "Material Design Icons Desktop"];
+		monospace = ["Fira Code Nerd Font" "Noto Color Emoji" "Material Design Icons Desktop"];
+		emoji = ["Noto Color Emoji" "Material Design Icons Desktop"];
 	};
 	fonts.packages = with pkgs; [
 		freefont_ttf
