@@ -34,6 +34,16 @@
 	services.blueman.enable = true;
 
 	virtualisation = {
+		libvirtd = {
+			  qemu = {
+    package = pkgs.qemu_kvm; # only emulates host arch, smaller download
+    swtpm.enable = true; # allows for creating emulated TPM
+    ovmf.packages = [(pkgs.OVMF.override {
+      secureBoot = true;
+      tpmSupport = true;
+    }).fd]; # or use pkgs.OVMFFull.fd, which enables more stuff
+  };
+			};
 		docker = {
 			daemon.settings = {
 				dns = [ "1.1.1.1" "8.8.8.8" "1.0.0.1" "8.8.4.4" ];
@@ -114,7 +124,7 @@
 	users.users.davisvkz = {
 		isNormalUser = true;
 		description = "Davi Silva Viana";
-		extraGroups = ["networkmanager" "wheel" "docker"];
+		extraGroups = ["networkmanager" "wheel" "docker" "libvirtd" "kvm"];
 		shell = pkgs.zsh;
 	};
 
@@ -143,6 +153,8 @@
 		home-manager
 		alsa-lib
 		alsa-lib.dev
+		qemu
+		virt-manager
 	];
 
 	system.stateVersion = "25.05";

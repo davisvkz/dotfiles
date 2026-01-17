@@ -180,5 +180,6 @@
 		plantuml-c4
 		pandoc
 		pandoc-plantuml-filter
+		vagrant
 	];
 }
