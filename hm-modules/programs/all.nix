@@ -1,8 +1,5 @@
-{
-	pkgs,
-	...
-}:
-{ home.packages = with pkgs; [
+{pkgs, ...}: {
+	home.packages = with pkgs; [
 		firefox
 		polybar
 		ldb
@@ -38,7 +35,6 @@
 		docker-credential-helpers
 		tmux
 		lazydocker
-		youtube-music
 		pinentry-curses
 		gcr
 		redis
@@ -86,7 +82,7 @@
 		xorg.xev
 		xorg.xeyes
 		hydralauncher
-		xfce.thunar
+		thunar
 		vscodium
 		ffmpeg-full
 		libsodium

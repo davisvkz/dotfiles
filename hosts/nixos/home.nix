@@ -17,9 +17,7 @@ in {
 					};
 			})
 	];
-	nix = {
-		package = with pkgs; nix;
-	};
+	nix = {package = with pkgs; nix;};
 
 	nixpkgs = {
 		config = {
@@ -29,10 +27,7 @@ in {
 	};
 	xdg.enable = true;
 	xdg.mime.enable = true;
-	imports = [
-		inputs.spicetify-nix.homeManagerModules.default
-		./hm-imports.nix
-	];
+	imports = [inputs.spicetify-nix.homeManagerModules.default ./hm-imports.nix];
 
 	dconf.enable = true;
 	dconf.settings = {
@@ -85,23 +80,22 @@ in {
 		username = "davisvkz";
 		homeDirectory = "/home/davisvkz";
 		shellAliases = {magick_cli = "magick";};
-		sessionVariables = {
-			NIXPKGS_ALLOW_UNFREE = "1";
-		};
+		sessionVariables = {NIXPKGS_ALLOW_UNFREE = "1";};
 		shell.enableZshIntegration = true;
 	};
 
 	home.file.".config/zsh/.zshrc".source = ./config/.zshrc;
-	programs.zsh = {enable = true;};
+	programs.zsh = {
+		enable = true;
+		dotDir = config.home.homeDirectory;
+	};
 	programs.password-store = {
 		enable = true;
 		package =
 			pkgs.pass.withExtensions
 			(exts: with exts; [pass-otp pass-import pass-audit]);
 	};
-	services.pass-secret-service = {
-		enable = true;
-	};
+	services.pass-secret-service = {enable = true;};
 	programs.git = {
 		enable = true;
 		settings.user = {
@@ -111,9 +105,7 @@ in {
 	};
 	programs.gh = {
 		enable = true;
-		gitCredentialHelper = {
-			enable = true;
-		};
+		gitCredentialHelper = {enable = true;};
 	};
 	programs.neovim = {
 		enable = true;
@@ -125,5 +117,5 @@ in {
 	xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk];
 	xdg.portal.config.common.default = "gtk";
 
-	home.stateVersion = "23.05";
+	home.stateVersion = "26.05";
 }
