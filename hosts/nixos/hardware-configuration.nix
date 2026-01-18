@@ -50,8 +50,8 @@
 	hardware.graphics = {
 		enable = true;
 		extraPackages = with pkgs; [
-		libvdpau-va-gl
-		intel-media-driver
+			libvdpau-va-gl
+			intel-media-driver
 		];
 	};
 }

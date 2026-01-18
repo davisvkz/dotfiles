@@ -4,11 +4,11 @@
 		enable = true;
 		backend = "glx";
 	};
-	  programs.nix-ld.enable = true;
+	programs.nix-ld.enable = true;
 
-  programs.nix-ld.libraries = with pkgs; [
-	nodejs
-  ];
+	programs.nix-ld.libraries = with pkgs; [
+		nodejs
+	];
 	programs.light.enable = true;
 	programs.gnupg.agent = {
 		enable = true;
@@ -35,23 +35,25 @@
 
 	virtualisation = {
 		libvirtd = {
-			  qemu = {
-    package = pkgs.qemu_kvm; # only emulates host arch, smaller download
-    swtpm.enable = true; # allows for creating emulated TPM
-    ovmf.packages = [(pkgs.OVMF.override {
-      secureBoot = true;
-      tpmSupport = true;
-    }).fd]; # or use pkgs.OVMFFull.fd, which enables more stuff
-  };
+			qemu = {
+				package = pkgs.qemu_kvm; # only emulates host arch, smaller download
+				swtpm.enable = true; # allows for creating emulated TPM
+				ovmf.packages = [
+					(pkgs.OVMF.override {
+							secureBoot = true;
+							tpmSupport = true;
+						}).fd
+				]; # or use pkgs.OVMFFull.fd, which enables more stuff
 			};
+		};
 		docker = {
 			daemon.settings = {
-				dns = [ "1.1.1.1" "8.8.8.8" "1.0.0.1" "8.8.4.4" ];
-				};
-				enable=true;
+				dns = ["1.1.1.1" "8.8.8.8" "1.0.0.1" "8.8.4.4"];
+			};
+			enable = true;
 			#rootless = {
-				#enable = true;
-				#setSocketVariable = true;
+			#enable = true;
+			#setSocketVariable = true;
 			#};
 		};
 	};
@@ -92,7 +94,7 @@
 
 	networking.hostName = "nixos";
 	networking.networkmanager.enable = true;
-	networking.nameservers = [ "1.1.1.1" "8.8.8.8" "8.8.4.4" "1.0.0.1"];
+	networking.nameservers = ["1.1.1.1" "8.8.8.8" "8.8.4.4" "1.0.0.1"];
 	networking.resolvconf.enable = true;
 
 	environment.variables.EDITOR = "neovim";
@@ -141,7 +143,6 @@
 
 	nixpkgs.config.allowUnfree = true;
 
-	
 	environment.systemPackages = with pkgs; [
 		neovim
 		git
@@ -159,5 +160,4 @@
 
 	system.stateVersion = "25.05";
 	networking.firewall.enable = false;
-
 }

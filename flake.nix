@@ -1,7 +1,7 @@
 {
 	description = "My Nixos configuration";
 	inputs = {
-		nix-snapd={
+		nix-snapd = {
 			url = "github:nix-community/nix-snapd";
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
@@ -59,7 +59,7 @@
 					pkgs = nixpkgs.legacyPackages.${system};
 					extraSpecialArgs = {inherit inputs outputs pkgs pkgs-stable system username;};
 					modules = [
-					./hosts/nixos/home.nix
+						./hosts/nixos/home.nix
 					];
 				};
 		};

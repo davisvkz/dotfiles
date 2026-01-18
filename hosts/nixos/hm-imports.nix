@@ -4,6 +4,6 @@
 		NIXPKGS_ALLOW_UNFREE = "1";
 	};
 	imports = [
-	../../hm-modules/programs/all.nix
+		../../hm-modules/programs/all.nix
 	];
 }
