@@ -117,5 +117,10 @@ in {
 	xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk];
 	xdg.portal.config.common.default = "gtk";
 
+	services.kdeconnect = {
+		enable = true;
+		indicator = true;
+	};
+
 	home.stateVersion = "26.05";
 }
