@@ -177,5 +177,13 @@
 		pandoc
 		pandoc-plantuml-filter
 		vagrant
+		postman
+		redocly
+		yq-go
+		play
+		ytmdesktop
+		pear-desktop
+		cloudflared
+		notion-app-enhanced
 	];
 }
