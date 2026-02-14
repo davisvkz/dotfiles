@@ -111,7 +111,19 @@ in {
 		enable = true;
 		extraLuaPackages = ps: [ps.magick];
 		extraPackages = [pkgs.imagemagick];
+		defaultEditor = true;
+		viAlias = true;
+		vimAlias = true;
+		withNodeJs = true;
+		withPython3 = true;
+		withRuby = true;
 	};
+
+	home.file.".config/nvim" = { 
+	source = /home/davisvkz/.config/nixos/hosts/nixos/config/nvim;
+	recursive = true;
+	};
+
 	programs.home-manager.enable = true;
 	systemd.user.startServices = "sd-switch";
 	xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk];

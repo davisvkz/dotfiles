@@ -121,7 +121,6 @@
 		btop
 		insomnia
 		deno
-		imagemagick
 		cmake
 		gitkraken
 		libnotify
@@ -160,6 +159,7 @@
 		(lib.lowPrio craftos-pc)
 		w3m
 		vesktop
+		yt-dlp
 
 		gcc
 		libgcc
@@ -185,5 +185,11 @@
 		pear-desktop
 		cloudflared
 		notion-app-enhanced
+		libreoffice
+		evince
+		zathura
+		xreader
+		kdePackages.okular
+		android-translation-layer
 	];
 }
