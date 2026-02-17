@@ -37,8 +37,8 @@
 	} @ inputs: let
 		inherit (self) outputs;
 		system = "x86_64-linux";
-		pkgs = nixpkgs.legacyPackages.${system};
-		pkgs-stable = nixpkgs-stable.legacyPackages.${system};
+		pkgs = import nixpkgs {inherit system; config.allowUnfree=true;};
+		pkgs-stable = import nixpkgs {inherit system; allowUnfree=true;};
 		username = "davisvkz";
 	in {
 		nixosConfigurations = {
@@ -59,7 +59,7 @@
 		homeConfigurations = {
 			${username} =
 				home-manager.lib.homeManagerConfiguration {
-					pkgs = nixpkgs.legacyPackages.${system};
+					pkgs = import nixpkgs {inherit system; config.allowUnfree=true;};
 					extraSpecialArgs = {inherit inputs outputs pkgs pkgs-stable system username;};
 					modules = [
 						./hosts/nixos/home.nix

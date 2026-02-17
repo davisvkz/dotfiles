@@ -6,7 +6,9 @@
 	pkgs,
 	...
 }: let
-	storePath = "${config.home.homeDirectory}/.password-store";
+	# Construct homeDirectory from username
+	homeDir = "/home/davisvkz";
+	storePath = "${homeDir}/.password-store";
 in {
 	nixpkgs.overlays = [
 		(final: prev: {
@@ -78,7 +80,7 @@ in {
 
 	home = {
 		username = "davisvkz";
-		homeDirectory = "/home/davisvkz";
+		homeDirectory = "/home/davisvkz";  # Required - use --impure
 		shellAliases = {magick_cli = "magick";};
 		sessionVariables = {NIXPKGS_ALLOW_UNFREE = "1";};
 		shell.enableZshIntegration = true;
@@ -87,7 +89,7 @@ in {
 	home.file.".config/zsh/.zshrc".source = ./config/.zshrc;
 	programs.zsh = {
 		enable = true;
-		dotDir = config.home.homeDirectory;
+		dotDir = homeDir;
 	};
 	programs.password-store = {
 		enable = true;
@@ -120,7 +122,7 @@ in {
 	};
 
 	home.file.".config/nvim" = {
-		source = /home/davisvkz/.config/nixos/hosts/nixos/config/nvim;
+		source = ./config/nvim;
 		recursive = true;
 	};
 
