@@ -10,23 +10,7 @@
 	homeDir = "/home/davisvkz";
 	storePath = "${homeDir}/.password-store";
 in {
-	nixpkgs.overlays = [
-		(final: prev: {
-				stable =
-					import inputs.nixpkgs-stable {
-						inherit (final) system;
-						config.allowUnfree = true;
-					};
-			})
-	];
 	nix = {package = with pkgs; nix;};
-
-	nixpkgs = {
-		config = {
-			cudaSupport = true;
-			allowUnfree = true;
-		};
-	};
 	xdg.enable = true;
 	xdg.mime.enable = true;
 	imports = [inputs.spicetify-nix.homeManagerModules.default ./hm-imports.nix];
