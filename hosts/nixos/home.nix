@@ -13,7 +13,7 @@ in {
 	nix = {package = with pkgs; nix;};
 	xdg.enable = true;
 	xdg.mime.enable = true;
-	imports = [inputs.spicetify-nix.homeManagerModules.default ./hm-imports.nix];
+	imports = [inputs.spicetify-nix.homeManagerModules.default ./hm-programs.nix ];
 
 	dconf.enable = true;
 	dconf.settings = {
