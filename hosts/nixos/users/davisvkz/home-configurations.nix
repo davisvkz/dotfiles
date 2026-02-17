@@ -13,7 +13,7 @@ in {
 	nix = {package = with pkgs; nix;};
 	xdg.enable = true;
 	xdg.mime.enable = true;
-	imports = [inputs.spicetify-nix.homeManagerModules.default ./hm-programs.nix ];
+	imports = [inputs.spicetify-nix.homeManagerModules.default ./hm-programs.nix];
 
 	dconf.enable = true;
 	dconf.settings = {
@@ -64,7 +64,7 @@ in {
 
 	home = {
 		username = "davisvkz";
-		homeDirectory = "/home/davisvkz";  # Required - use --impure
+		homeDirectory = "/home/davisvkz"; # Required - use --impure
 		shellAliases = {magick_cli = "magick";};
 		sessionVariables = {NIXPKGS_ALLOW_UNFREE = "1";};
 		shell.enableZshIntegration = true;

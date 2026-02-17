@@ -23,48 +23,12 @@
 		llm-agents = {
 			url = "github:numtide/llm-agents.nix";
 		};
+		blueprint.url = "github:numtide/blueprint";
+		blueprint.inputs.nixpkgs.follows = "nixpkgs";
 	};
 
-	outputs = {
-		self,
-		nixpkgs,
-		nixpkgs-stable,
-		home-manager,
-		nur,
-		nix-snapd,
-		llm-agents,
-		...
-	} @ inputs: let
-		inherit (self) outputs;
-		system = "x86_64-linux";
-		pkgs = import nixpkgs {inherit system; config.allowUnfree=true;};
-		pkgs-stable = import nixpkgs {inherit system; allowUnfree=true;};
-		username = "davisvkz";
-	in {
-		nixosConfigurations = {
-			nixos =
-				nixpkgs.lib.nixosSystem {
-					specialArgs = {inherit inputs outputs pkgs pkgs-stable system username;};
-					modules = [
-						./hosts/nixos/configuration.nix
-						nur.modules.nixos.default
-						nix-snapd.nixosModules.default
-						{
-							services.snap.enable = true;
-						}
-					];
-				};
+	outputs =
+		inputs : inputs.blueprint {
+			inherit inputs;
 		};
-
-		homeConfigurations = {
-			${username} =
-				home-manager.lib.homeManagerConfiguration {
-					pkgs = import nixpkgs {inherit system; config.allowUnfree=true;};
-					extraSpecialArgs = {inherit inputs outputs pkgs pkgs-stable system username;};
-					modules = [
-						./hosts/nixos/home.nix
-					];
-				};
-		};
-	};
 }
