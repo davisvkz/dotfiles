@@ -20,6 +20,9 @@
 			url = "github:nix-community/home-manager/master";
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
+		llm-agents = {
+			url = "github:numtide/llm-agents.nix";
+		};
 	};
 
 	outputs = {
@@ -29,13 +32,13 @@
 		home-manager,
 		nur,
 		nix-snapd,
+		llm-agents,
 		...
 	} @ inputs: let
 		inherit (self) outputs;
 		system = "x86_64-linux";
 		pkgs = nixpkgs.legacyPackages.${system};
 		pkgs-stable = nixpkgs-stable.legacyPackages.${system};
-		inherit (nixpkgs);
 		username = "davisvkz";
 	in {
 		nixosConfigurations = {

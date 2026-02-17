@@ -99,14 +99,12 @@
 		prismlauncher
 		betterdiscordctl
 		discord
-		python3Packages.opencv4
 		glibc
 		gcc
 		dxvk
 		cage
 		waydroid-helper
 		gamescope
-		python3
 		gst_all_1.gstreamer
 		vlc
 		blender
@@ -172,7 +170,12 @@
 		pandoc
 		tectonic
 		lsof
-		python3Packages.pygobject3
+		(python3.withPackages (ps:
+					with ps; [
+						pygobject3
+						pycairo
+						opencv4
+					]))
 		plantuml-c4
 		pandoc
 		pandoc-plantuml-filter
@@ -191,5 +194,9 @@
 		xreader
 		kdePackages.okular
 		android-translation-layer
+		openssl
+		playwright-driver.browsers
+		biome
+		weechat
 	];
 }

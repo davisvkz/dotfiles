@@ -97,7 +97,24 @@
 	networking.nameservers = ["1.1.1.1" "8.8.8.8" "8.8.4.4" "1.0.0.1"];
 	networking.resolvconf.enable = true;
 
-	environment.variables.EDITOR = "neovim";
+	hardware.graphics = {
+		enable = true;
+		enable32Bit = true;
+		extraPackages = with pkgs; [
+			libva
+			libva-utils
+			intel-media-driver # Intel QuickSync Video (QSV)
+			libva-vdpau-driver
+			libvdpau-va-gl
+		];
+	};
+
+	# For mpv hardware decoding
+	environment.variables = {
+		EDITOR = "neovim";
+		# Enable VAAPI for mpv
+		LIBVA_DRIVER_NAME = "iHD";
+	};
 
 	time.timeZone = "America/Maceio";
 

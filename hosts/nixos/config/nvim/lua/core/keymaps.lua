@@ -1,0 +1,8 @@
+vim.keymap.set('n', '<', ':BufferPrevious<CR>')
+vim.keymap.set('n', '>', ':BufferNext<CR>')
+vim.keymap.set('n', '<leader><', ':BufferMovePrevious<CR>')
+vim.keymap.set('n', '<leader>>', ':BufferMoveNext<CR>')
+--vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "LSP Code Action" })
+vim.keymap.set({ "n", "x" }, "<leader>ca", function()
+require("tiny-code-action").code_action()
+end, { noremap = true, silent = true })

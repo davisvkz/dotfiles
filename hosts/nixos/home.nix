@@ -119,9 +119,9 @@ in {
 		withRuby = true;
 	};
 
-	home.file.".config/nvim" = { 
-	source = /home/davisvkz/.config/nixos/hosts/nixos/config/nvim;
-	recursive = true;
+	home.file.".config/nvim" = {
+		source = /home/davisvkz/.config/nixos/hosts/nixos/config/nvim;
+		recursive = true;
 	};
 
 	programs.home-manager.enable = true;
