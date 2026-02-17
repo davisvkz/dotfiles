@@ -10,6 +10,7 @@
 	homeDir = "/home/davisvkz";
 	storePath = "${homeDir}/.password-store";
 in {
+	nixpkgs.config.allowUnfree = true;
 	nix = {package = with pkgs; nix;};
 	xdg.enable = true;
 	xdg.mime.enable = true;

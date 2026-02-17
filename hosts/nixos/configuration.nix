@@ -86,7 +86,6 @@
 		./hardware-configuration.nix
 		./programs.nix
 		#      ./my-hardware.nix
-		./imports.nix
 	];
 
 	boot.loader.systemd-boot.enable = true;
