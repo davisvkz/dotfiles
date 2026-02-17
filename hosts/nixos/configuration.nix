@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{pkgs,flake, ...}: {
 	services.logind.lidSwitch = "ignore";
 	services.picom = {
 		enable = true;
@@ -84,8 +84,7 @@
 
 	imports = [
 		./hardware-configuration.nix
-		./programs.nix
-		#      ./my-hardware.nix
+		"${flake}/modules/nixos/all.nix"
 	];
 
 	boot.loader.systemd-boot.enable = true;

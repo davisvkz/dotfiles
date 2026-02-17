@@ -75,7 +75,6 @@
 		steamtinkerlaunch
 		freetype
 		gnumake
-		glib
 		dconf
 		jq
 		xsel
@@ -85,8 +84,6 @@
 		thunar
 		vscodium
 		ffmpeg-full
-		libsodium
-		node-gyp
 		alsa-lib
 		alsa-lib.dev
 		ncdu
@@ -99,7 +96,6 @@
 		prismlauncher
 		betterdiscordctl
 		discord
-		glibc
 		gcc
 		dxvk
 		cage
@@ -159,11 +155,6 @@
 		vesktop
 		yt-dlp
 
-		gcc
-		libgcc
-		gnumake
-		cmake
-		extra-cmake-modules
 		go
 		calibre
 		google-chrome
