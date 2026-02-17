@@ -23,12 +23,14 @@
 		llm-agents = {
 			url = "github:numtide/llm-agents.nix";
 		};
+		winapps.url = "github:winapps-org/winapps";
+		winapps.inputs.nixpkgs.follows = "nixpkgs";
 		blueprint.url = "github:numtide/blueprint";
 		blueprint.inputs.nixpkgs.follows = "nixpkgs";
 	};
 
-	outputs =
-		inputs : inputs.blueprint {
+	outputs = inputs:
+		inputs.blueprint {
 			inherit inputs;
 		};
 }

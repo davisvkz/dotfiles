@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{pkgs,perSystem, ...}: {
 	home.packages = with pkgs; [
 		firefox
 		polybar
@@ -198,5 +198,6 @@
 		playwright-driver.browsers
 		biome
 		weechat
+		perSystem.winapps.winapps
 	];
 }

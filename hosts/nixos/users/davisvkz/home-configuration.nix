@@ -4,6 +4,7 @@
 	lib,
 	config,
 	pkgs,
+	flake,
 	...
 }: let
 	# Construct homeDirectory from username
@@ -14,7 +15,7 @@ in {
 	nix = {package = with pkgs; nix;};
 	xdg.enable = true;
 	xdg.mime.enable = true;
-	imports = [inputs.spicetify-nix.homeManagerModules.default ./hm-programs.nix];
+	imports = [inputs.spicetify-nix.homeManagerModules.default "${flake}/modules/home/all.nix"];
 
 	dconf.enable = true;
 	dconf.settings = {
