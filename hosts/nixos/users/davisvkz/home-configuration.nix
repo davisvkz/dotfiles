@@ -5,6 +5,7 @@
 	config,
 	pkgs,
 	flake,
+	system,
 	...
 }: let
 	# Construct homeDirectory from username
@@ -12,8 +13,26 @@
 	storePath = "${homeDir}/.password-store";
 in {
 	nixpkgs.config.allowUnfree = true;
-	xdg.enable = true;
-	xdg.mime.enable = true;
+	xdg = {
+		enable = true;
+		desktopEntries = {
+			firefox = {
+				name = "firefox";
+				exec = "${pkgs.firefox}/bin/firefox";
+			};
+			roblox = {
+				name = "roblox";
+				exec = "/var/lib/flatpak/app/org.vinegarhq.Sober/current/active/export/bin/org.vinegarhq.Sober";
+			};
+		};
+		mimeApps = {
+			enable = true;
+			defaultApplications = {
+				"text/html" = "firefox.desktop";
+				"x-scheme-handler/roblox-player" = "roblox.desktop";
+			};
+		};
+	};
 	imports = [inputs.spicetify-nix.homeManagerModules.default "${flake}/modules/home/all.nix"];
 
 	dconf.enable = true;
@@ -67,7 +86,6 @@ in {
 		username = "davisvkz";
 		homeDirectory = "/home/davisvkz"; # Required - use --impure
 		shellAliases = {magick_cli = "magick";};
-		sessionVariables = {NIXPKGS_ALLOW_UNFREE = "1";};
 		shell.enableZshIntegration = true;
 	};
 
@@ -112,6 +130,7 @@ in {
 	};
 
 	programs.home-manager.enable = true;
+
 	systemd.user.startServices = "sd-switch";
 	xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk];
 	xdg.portal.config.common.default = "gtk";
@@ -121,5 +140,14 @@ in {
 		indicator = true;
 	};
 
+
+	home.file.".cache/ms-playwright" = let
+		browsers =
+			(builtins.fromJSON (builtins.readFile "${pkgs.playwright-driver}/browsers.json")).browsers;
+		chromium-rev = (builtins.head (builtins.filter (x: x.name == "chromium") browsers)).revision;
+	in {
+		source = pkgs.playwright-driver.browsers;
+		recursive = true;
+	};
 	home.stateVersion = "26.05";
 }
