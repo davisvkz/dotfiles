@@ -175,4 +175,11 @@
 
 	system.stateVersion = "25.11";
 	networking.firewall.enable = false;
+
+	
+
+  systemd.tmpfiles.rules = [
+    "d /opt/google/chrome 0755 root root -"
+    "L+ /opt/google/chrome/chrome - - - - ${pkgs.google-chrome}/bin/google-chrome-stable"
+  ];
 }
