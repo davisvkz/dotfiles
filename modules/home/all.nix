@@ -49,7 +49,6 @@
 		lazysql
 		gobang
 		chromium
-		wine
 		winetricks
 		obs-studio
 		obs-do
@@ -189,6 +188,14 @@
 		playwright-driver.browsers
 		biome
 		weechat
-		perSystem.winapps.winapps
+		gallery-dl
+		tiled
+		aseprite
+		wineWow64Packages.stable
+		dialog
+		freerdp
+		winboat
+		slack
+		telegram-desktop
 	];
 }

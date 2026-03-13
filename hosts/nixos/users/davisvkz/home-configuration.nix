@@ -1,14 +1,9 @@
 {
 	inputs,
-	outputs,
-	lib,
-	config,
 	pkgs,
 	flake,
-	system,
 	...
 }: let
-	# Construct homeDirectory from username
 	homeDir = "/home/davisvkz";
 	storePath = "${homeDir}/.password-store";
 in {
@@ -81,10 +76,7 @@ in {
 	services.gpg-agent = {
 		enable = true;
 		enableSshSupport = true;
-		pinentry = {
-			package = pkgs.pinentry-curses;
-			#program = pkgs.pinentry;
-		};
+		pinentry = { package = pkgs.pinentry-rofi;};
 	};
 
 	home = {

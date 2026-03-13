@@ -1,5 +1,9 @@
-{pkgs,flake, ...}: {
-	services.logind.lidSwitch = "ignore";
+{
+	pkgs,
+	flake,
+	...
+}: {
+	services.logind.settings.Login.HandleLidSwitch = "ignore";
 	services.picom = {
 		enable = true;
 		backend = "glx";
@@ -12,6 +16,7 @@
 	programs.light.enable = true;
 	programs.gnupg.agent = {
 		enable = true;
+		pinentryPackage = pkgs.pinentry-rofi;
 		enableSSHSupport = true;
 	};
 	programs.steam = {
@@ -24,7 +29,7 @@
 			true; # Open ports in the firewall for Steam Local Network Game Transfers
 	};
 	services.locate.enable = true;
-	services.locate.locate = pkgs.plocate;
+	services.locate.package = pkgs.plocate;
 	virtualisation.waydroid.enable = true;
 	services.flatpak.enable = true;
 	xdg.portal.enable = true;
@@ -33,6 +38,12 @@
 	hardware.bluetooth.enable = true;
 	services.blueman.enable = true;
 
+	security.rtkit.enable = true;
+	services.pipewire = {
+		enable = true;
+		alsa.enable = true;
+		pulse.enable = true;
+	};
 	virtualisation = {
 		libvirtd = {
 			qemu = {
@@ -84,6 +95,7 @@
 
 	imports = [
 		./hardware-configuration.nix
+		./my-hardware.nix
 		"${flake}/modules/nixos/all.nix"
 	];
 
@@ -164,8 +176,6 @@
 		wget
 		polybar
 		lf
-		nixd
-		imagemagick
 		home-manager
 		alsa-lib
 		alsa-lib.dev
@@ -175,11 +185,16 @@
 
 	system.stateVersion = "25.11";
 	networking.firewall.enable = false;
+	services.libinput = {
+		enable = true;
+		touchpad = {
+			tapping = true;
+			clickMethod = "buttonareas";
+		};
+	};
 
-	
-
-  systemd.tmpfiles.rules = [
-    "d /opt/google/chrome 0755 root root -"
-    "L+ /opt/google/chrome/chrome - - - - ${pkgs.google-chrome}/bin/google-chrome-stable"
-  ];
+	systemd.tmpfiles.rules = [
+		"d /opt/google/chrome 0755 root root -"
+		"L+ /opt/google/chrome/chrome - - - - ${pkgs.google-chrome}/bin/google-chrome-stable"
+	];
 }
