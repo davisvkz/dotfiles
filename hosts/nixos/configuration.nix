@@ -171,14 +171,7 @@
 	nixpkgs.config.allowUnfree = true;
 
 	environment.systemPackages = with pkgs; [
-		neovim
-		git
-		wget
-		polybar
-		lf
 		home-manager
-		alsa-lib
-		alsa-lib.dev
 		qemu
 		virt-manager
 	];

@@ -1,5 +1,6 @@
 {pkgs,perSystem, ...}: {
 	home.packages = with pkgs; [
+		git
 		firefox
 		polybar
 		ldb
@@ -81,7 +82,6 @@
 		xorg.xeyes
 		hydralauncher
 		thunar
-		vscodium
 		ffmpeg-full
 		alsa-lib
 		alsa-lib.dev
@@ -197,5 +197,13 @@
 		winboat
 		slack
 		telegram-desktop
+		wget
+		texstudio
+		texmaker
+		nil
+		texliveFull
+		vscode
+		graphviz
+		tree
 	];
 }

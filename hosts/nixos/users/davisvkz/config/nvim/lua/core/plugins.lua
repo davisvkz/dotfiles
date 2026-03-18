@@ -23,7 +23,7 @@ require("lazy").setup({
 		{ import = "plugins" },
 	},
 	install = { colorscheme = { "andromeda" } },
-	checker = { enabled = true },
+	-- checker = { enabled = true },
 	performance = {
 		rtp = {
 			disabled_plugins = {
