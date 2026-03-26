@@ -26,7 +26,7 @@
 		docker
 		#docker-client
 		lshw
-		neofetch
+		fastfetch
 		bluez
 		nixd
 		xpaste
@@ -110,7 +110,7 @@
 		fuse
 		dbeaver-bin
 		khal
-		khard
+		#khard
 		btop
 		insomnia
 		deno
@@ -194,7 +194,7 @@
 		wineWow64Packages.stable
 		dialog
 		freerdp
-		winboat
+		#winboat
 		slack
 		telegram-desktop
 		wget
@@ -205,5 +205,7 @@
 		vscode
 		graphviz
 		tree
+		net-tools
+		nmap
 	];
 }

@@ -76,7 +76,7 @@ in {
 	services.gpg-agent = {
 		enable = true;
 		enableSshSupport = true;
-		pinentry = { package = pkgs.pinentry-rofi;};
+		pinentry = {package = pkgs.pinentry-rofi;};
 	};
 
 	home = {
@@ -84,6 +84,9 @@ in {
 		homeDirectory = "/home/davisvkz"; # Required - use --impure
 		shellAliases = {magick_cli = "magick";};
 		shell.enableZshIntegration = true;
+		sessionVariables = {
+			PLANTUML_JAR = "${pkgs.plantuml}/lib/plantuml.jar";
+		};
 	};
 
 	home.file.".config/zsh/.zshrc".source = ./config/.zshrc;

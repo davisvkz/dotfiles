@@ -13,7 +13,6 @@
 	programs.nix-ld.libraries = with pkgs; [
 		nodejs
 	];
-	programs.light.enable = true;
 	programs.gnupg.agent = {
 		enable = true;
 		pinentryPackage = pkgs.pinentry-rofi;
