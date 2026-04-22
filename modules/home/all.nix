@@ -77,6 +77,7 @@
 		gnumake
 		dconf
 		jq
+		mdq
 		xsel
 		xorg.xev
 		xorg.xeyes
@@ -202,10 +203,38 @@
 		texmaker
 		nil
 		texliveFull
+		#texlive.combined.scheme-full
+		#(texlive.combine {
+		#	inherit (texlive) scheme-full;
+		#	pkgFilter = pkg: builtins.elem pkg.tlType [ "run" "bin" "doc" ];
+		#	})
+		#(texlive.combine {
+		#	inherit (texlive)
+		#		scheme-full
+		#		latexmk
+		#		texdoc;
+		#})
 		vscode
 		graphviz
 		tree
 		net-tools
 		nmap
+		gobuster
+		dirb
+		slowhttptest
+		sherlock
+		speechd
+		metasploit
+		postgresql
+		sqlmap
+		ghauri
+		chromedriver
+		songrec
+		poppler-utils
+		xcolor
+		sxcs
+		zbar
+		translate-shell
+		hollywood
 	];
 }

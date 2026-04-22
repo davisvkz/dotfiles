@@ -23,6 +23,7 @@ in {
 		mimeApps = {
 			enable = true;
 			defaultApplications = {
+				"application/pdf" = "org.pwmt.zathura.desktop";
 				"text/html" = "firefox.desktop";
 				"text/xml" = "firefox.desktop";
 				"x-scheme-handler/http" = "firefox.desktop";

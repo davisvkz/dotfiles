@@ -69,6 +69,7 @@
 	};
 
 	programs.mtr.enable = true;
+	fonts.fontconfig.enable=true;
 	fonts.fontconfig.defaultFonts = {
 		sansSerif = ["Noto Sans CJK SC" "Noto Color Emoji" "Fira Code Nerd Font" "Material Design Icons Desktop"];
 		serif = ["Merriweather" "Fira Code Nerd Font" "Noto Color Emoji" "Material Design Icons Desktop"];
@@ -83,8 +84,9 @@
 		noto-fonts-color-emoji
 		noto-fonts-cjk-sans
 		liberation_ttf
-		fira-code
-		fira-code-symbols
+		source-sans-pro
+		newcomputermodern
+		cm_unicode
 		mplus-outline-fonts.githubRelease
 		dina-font
 		proggyfonts
@@ -176,7 +178,8 @@
 	];
 
 	system.stateVersion = "25.11";
-	networking.firewall.enable = false;
+	networking.firewall.enable = true;
+	networking.firewall.allowedTCPPorts = [8080];
 	services.libinput = {
 		enable = true;
 		touchpad = {
@@ -184,6 +187,17 @@
 			clickMethod = "buttonareas";
 		};
 	};
+	services.gnome.gnome-keyring.enable = true;
+	services.dbus.enable = true;
+	services.postgresql = {
+  enable = true;
+  package = pkgs.postgresql;
+  authentication = pkgs.lib.mkForce ''
+    # TYPE  DATABASE        USER            ADDRESS                 METHOD
+    local   all             all                                     trust
+  '';
+};
+
 
 	systemd.tmpfiles.rules = [
 		"d /opt/google/chrome 0755 root root -"
