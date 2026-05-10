@@ -139,9 +139,9 @@
 		ruffle
 		pipx
 		ngrok
-		lutris
+		#lutris
 		obsidian
-		android-translation-layer
+		#android-translation-layer
 		docker-compose
 		zoxide
 		supabase-cli
@@ -174,7 +174,6 @@
 		postman
 		redocly
 		yq-go
-		play
 		ytmdesktop
 		pear-desktop
 		cloudflared
@@ -184,7 +183,6 @@
 		zathura
 		xreader
 		kdePackages.okular
-		android-translation-layer
 		openssl
 		playwright-driver.browsers
 		biome
@@ -236,5 +234,27 @@
 		zbar
 		translate-shell
 		hollywood
+		sox
+		(symlinkJoin {
+			name = "gplay";
+			paths = [ pkgs.play ];
+			postBuild = ''
+				rm $out/bin/play
+			'';
+		})
+		rustc
+		cargo
+		openai-whisper
+		traceroute
+		brightnessctl
+		newsboat
+		feedr
+		rsshub
+		rsstail
+		voxinput
+		ferium
+		packwiz
+		koreader
+		typst
 	];
 }

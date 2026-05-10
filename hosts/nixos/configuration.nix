@@ -20,13 +20,26 @@
 	};
 	programs.steam = {
 		enable = true;
-		remotePlay.openFirewall =
-			true; # Open ports in the firewall for Steam Remote Play
-		dedicatedServer.openFirewall =
-			true; # Open ports in the firewall for Source Dedicated Server
-		localNetworkGameTransfers.openFirewall =
-			true; # Open ports in the firewall for Steam Local Network Game Transfers
+		remotePlay.openFirewall = true;
+		dedicatedServer.openFirewall = true;
+		localNetworkGameTransfers.openFirewall = true;
+		protontricks.enable = true;
+		extraPackages = with pkgs; [
+			steamtinkerlaunch
+			yad
+			xdotool
+			unzip
+			cabextract
+			p7zip
+		];
+
+		extraCompatPackages = with pkgs; [
+			steamtinkerlaunch
+			proton-ge-bin
+		];
 	};
+
+  programs.gamemode.enable = true;
 	services.locate.enable = true;
 	services.locate.package = pkgs.plocate;
 	virtualisation.waydroid.enable = true;
@@ -42,6 +55,7 @@
 		enable = true;
 		alsa.enable = true;
 		pulse.enable = true;
+		wireplumber.enable = true;
 	};
 	virtualisation = {
 		libvirtd = {

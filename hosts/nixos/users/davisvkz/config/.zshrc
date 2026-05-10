@@ -3778,3 +3778,1280 @@ if [ "$funcstack[1]" = "_railway" ]; then
 else
     compdef _railway railway
 fi
+#compdef ferium
+
+autoload -U is-at-least
+
+_ferium() {
+    typeset -A opt_args
+    typeset -a _arguments_options
+    local ret=1
+
+    if is-at-least 5.2; then
+        _arguments_options=(-s -S -C)
+    else
+        _arguments_options=(-s -C)
+    fi
+
+    local context curcontext="$curcontext" state line
+    _arguments "${_arguments_options[@]}" : \
+'-t+[Sets the number of worker threads the tokio runtime will use. You can also use the environment variable \`TOKIO_WORKER_THREADS\`]:THREADS: ' \
+'--threads=[Sets the number of worker threads the tokio runtime will use. You can also use the environment variable \`TOKIO_WORKER_THREADS\`]:THREADS: ' \
+'--github-token=[Set a GitHub personal access token for increasing the GitHub API rate limit. You can also use the environment variable \`GITHUB_TOKEN\`]:GITHUB_TOKEN: ' \
+'--gh=[Set a GitHub personal access token for increasing the GitHub API rate limit. You can also use the environment variable \`GITHUB_TOKEN\`]:GITHUB_TOKEN: ' \
+'--curseforge-api-key=[Set a custom Curseforge API key. You can also use the environment variable \`CURSEFORGE_API_KEY\`]:CURSEFORGE_API_KEY: ' \
+'--cf=[Set a custom Curseforge API key. You can also use the environment variable \`CURSEFORGE_API_KEY\`]:CURSEFORGE_API_KEY: ' \
+'-c+[Set the file to read the config from. This does not change the \`cache\` and \`tmp\` directories. You can also use the environment variable \`FERIUM_CONFIG_FILE\`]:CONFIG_FILE:_files' \
+'--config-file=[Set the file to read the config from. This does not change the \`cache\` and \`tmp\` directories. You can also use the environment variable \`FERIUM_CONFIG_FILE\`]:CONFIG_FILE:_files' \
+'--config=[Set the file to read the config from. This does not change the \`cache\` and \`tmp\` directories. You can also use the environment variable \`FERIUM_CONFIG_FILE\`]:CONFIG_FILE:_files' \
+'--conf=[Set the file to read the config from. This does not change the \`cache\` and \`tmp\` directories. You can also use the environment variable \`FERIUM_CONFIG_FILE\`]:CONFIG_FILE:_files' \
+'-h[Print help]' \
+'--help[Print help]' \
+'-V[Print version]' \
+'--version[Print version]' \
+":: :_ferium_commands" \
+"*::: :->ferium" \
+&& ret=0
+    case $state in
+    (ferium)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:ferium-command-$line[1]:"
+        case $line[1] in
+            (add)
+_arguments "${_arguments_options[@]}" : \
+'-f[Temporarily ignore game version and mod loader checks and add the mod anyway]' \
+'--force[Temporarily ignore game version and mod loader checks and add the mod anyway]' \
+'--override[Temporarily ignore game version and mod loader checks and add the mod anyway]' \
+'-V[The game version will not be checked for this mod. Only works when adding a single mod]' \
+'--ignore-game-version[The game version will not be checked for this mod. Only works when adding a single mod]' \
+'-M[The mod loader will not be checked for this mod. Only works when adding a single mod]' \
+'--ignore-mod-loader[The mod loader will not be checked for this mod. Only works when adding a single mod]' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
+'*::identifiers -- The identifier(s) of the mod/project/repository:' \
+&& ret=0
+;;
+(scan)
+_arguments "${_arguments_options[@]}" : \
+'-p+[The platform you prefer mods to be added from. If a mod isn'\''t available from this platform, the other platform will still be used]:PLATFORM:(modrinth curseforge)' \
+'--platform=[The platform you prefer mods to be added from. If a mod isn'\''t available from this platform, the other platform will still be used]:PLATFORM:(modrinth curseforge)' \
+'-d+[The directory to scan mods from. Defaults to the profile'\''s output directory]:DIRECTORY:_files' \
+'--directory=[The directory to scan mods from. Defaults to the profile'\''s output directory]:DIRECTORY:_files' \
+'--dir=[The directory to scan mods from. Defaults to the profile'\''s output directory]:DIRECTORY:_files' \
+'--folder=[The directory to scan mods from. Defaults to the profile'\''s output directory]:DIRECTORY:_files' \
+'-f[Temporarily ignore game version and mod loader checks and add the mods anyway]' \
+'--force[Temporarily ignore game version and mod loader checks and add the mods anyway]' \
+'--override[Temporarily ignore game version and mod loader checks and add the mods anyway]' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(complete)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+':shell -- The shell to generate auto completions for:(bash elvish fish powershell zsh)' \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" : \
+'-v[Show additional information about the mod]' \
+'--verbose[Show additional information about the mod]' \
+'-m[Output information in markdown format and alphabetical order]' \
+'--markdown[Output information in markdown format and alphabetical order]' \
+'--md[Output information in markdown format and alphabetical order]' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
+&& ret=0
+;;
+(mods)
+_arguments "${_arguments_options[@]}" : \
+'-v[Show additional information about the mod]' \
+'--verbose[Show additional information about the mod]' \
+'-m[Output information in markdown format and alphabetical order]' \
+'--markdown[Output information in markdown format and alphabetical order]' \
+'--md[Output information in markdown format and alphabetical order]' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
+&& ret=0
+;;
+(modpack)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+":: :_ferium__modpack_commands" \
+"*::: :->modpack" \
+&& ret=0
+
+    case $state in
+    (modpack)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:ferium-modpack-command-$line[1]:"
+        case $line[1] in
+            (add)
+_arguments "${_arguments_options[@]}" : \
+'-o+[The Minecraft instance directory to install the modpack to]:OUTPUT_DIR:_files -/' \
+'--output-dir=[The Minecraft instance directory to install the modpack to]:OUTPUT_DIR:_files -/' \
+'-i+[Whether to install the modpack'\''s overrides to the output directory. This will override existing files when upgrading]:INSTALL_OVERRIDES:(true false)' \
+'--install-overrides=[Whether to install the modpack'\''s overrides to the output directory. This will override existing files when upgrading]:INSTALL_OVERRIDES:(true false)' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
+':identifier -- The identifier of the modpack/project:' \
+&& ret=0
+;;
+(configure)
+_arguments "${_arguments_options[@]}" : \
+'-o+[The Minecraft instance directory to install the modpack to]:OUTPUT_DIR:_files -/' \
+'--output-dir=[The Minecraft instance directory to install the modpack to]:OUTPUT_DIR:_files -/' \
+'-i+[Whether to install the modpack'\''s overrides to the output directory. This will override existing files when upgrading]:INSTALL_OVERRIDES:(true false)' \
+'--install-overrides=[Whether to install the modpack'\''s overrides to the output directory. This will override existing files when upgrading]:INSTALL_OVERRIDES:(true false)' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(config)
+_arguments "${_arguments_options[@]}" : \
+'-o+[The Minecraft instance directory to install the modpack to]:OUTPUT_DIR:_files -/' \
+'--output-dir=[The Minecraft instance directory to install the modpack to]:OUTPUT_DIR:_files -/' \
+'-i+[Whether to install the modpack'\''s overrides to the output directory. This will override existing files when upgrading]:INSTALL_OVERRIDES:(true false)' \
+'--install-overrides=[Whether to install the modpack'\''s overrides to the output directory. This will override existing files when upgrading]:INSTALL_OVERRIDES:(true false)' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(conf)
+_arguments "${_arguments_options[@]}" : \
+'-o+[The Minecraft instance directory to install the modpack to]:OUTPUT_DIR:_files -/' \
+'--output-dir=[The Minecraft instance directory to install the modpack to]:OUTPUT_DIR:_files -/' \
+'-i+[Whether to install the modpack'\''s overrides to the output directory. This will override existing files when upgrading]:INSTALL_OVERRIDES:(true false)' \
+'--install-overrides=[Whether to install the modpack'\''s overrides to the output directory. This will override existing files when upgrading]:INSTALL_OVERRIDES:(true false)' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(delete)
+_arguments "${_arguments_options[@]}" : \
+'-s+[The name of the profile to switch to afterwards]:SWITCH_TO: ' \
+'--switch-to=[The name of the profile to switch to afterwards]:SWITCH_TO: ' \
+'-h[Print help]' \
+'--help[Print help]' \
+'::modpack_name -- The name of the modpack to delete:' \
+&& ret=0
+;;
+(remove)
+_arguments "${_arguments_options[@]}" : \
+'-s+[The name of the profile to switch to afterwards]:SWITCH_TO: ' \
+'--switch-to=[The name of the profile to switch to afterwards]:SWITCH_TO: ' \
+'-h[Print help]' \
+'--help[Print help]' \
+'::modpack_name -- The name of the modpack to delete:' \
+&& ret=0
+;;
+(rm)
+_arguments "${_arguments_options[@]}" : \
+'-s+[The name of the profile to switch to afterwards]:SWITCH_TO: ' \
+'--switch-to=[The name of the profile to switch to afterwards]:SWITCH_TO: ' \
+'-h[Print help]' \
+'--help[Print help]' \
+'::modpack_name -- The name of the modpack to delete:' \
+&& ret=0
+;;
+(info)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(switch)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+'::modpack_name -- The name of the modpack to switch to:' \
+&& ret=0
+;;
+(upgrade)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(download)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(install)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+":: :_ferium__modpack__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:ferium-modpack-help-command-$line[1]:"
+        case $line[1] in
+            (add)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(configure)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(delete)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(info)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(switch)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(upgrade)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+;;
+(modpacks)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(profile)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+":: :_ferium__profile_commands" \
+"*::: :->profile" \
+&& ret=0
+
+    case $state in
+    (profile)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:ferium-profile-command-$line[1]:"
+        case $line[1] in
+            (configure)
+_arguments "${_arguments_options[@]}" : \
+'-v+[The Minecraft version to check compatibility for]:GAME_VERSION: ' \
+'--game-version=[The Minecraft version to check compatibility for]:GAME_VERSION: ' \
+'-m+[The mod loader to check compatibility for]:MOD_LOADER:(quilt fabric forge neo-forge)' \
+'--mod-loader=[The mod loader to check compatibility for]:MOD_LOADER:(quilt fabric forge neo-forge)' \
+'-n+[The name of the profile]:NAME: ' \
+'--name=[The name of the profile]:NAME: ' \
+'-o+[The directory to output mods to]:OUTPUT_DIR:_files -/' \
+'--output-dir=[The directory to output mods to]:OUTPUT_DIR:_files -/' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(config)
+_arguments "${_arguments_options[@]}" : \
+'-v+[The Minecraft version to check compatibility for]:GAME_VERSION: ' \
+'--game-version=[The Minecraft version to check compatibility for]:GAME_VERSION: ' \
+'-m+[The mod loader to check compatibility for]:MOD_LOADER:(quilt fabric forge neo-forge)' \
+'--mod-loader=[The mod loader to check compatibility for]:MOD_LOADER:(quilt fabric forge neo-forge)' \
+'-n+[The name of the profile]:NAME: ' \
+'--name=[The name of the profile]:NAME: ' \
+'-o+[The directory to output mods to]:OUTPUT_DIR:_files -/' \
+'--output-dir=[The directory to output mods to]:OUTPUT_DIR:_files -/' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(conf)
+_arguments "${_arguments_options[@]}" : \
+'-v+[The Minecraft version to check compatibility for]:GAME_VERSION: ' \
+'--game-version=[The Minecraft version to check compatibility for]:GAME_VERSION: ' \
+'-m+[The mod loader to check compatibility for]:MOD_LOADER:(quilt fabric forge neo-forge)' \
+'--mod-loader=[The mod loader to check compatibility for]:MOD_LOADER:(quilt fabric forge neo-forge)' \
+'-n+[The name of the profile]:NAME: ' \
+'--name=[The name of the profile]:NAME: ' \
+'-o+[The directory to output mods to]:OUTPUT_DIR:_files -/' \
+'--output-dir=[The directory to output mods to]:OUTPUT_DIR:_files -/' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(create)
+_arguments "${_arguments_options[@]}" : \
+'-i+[Copy over the mods from an existing profile. Optionally, provide the name of the profile to import mods from]' \
+'--import=[Copy over the mods from an existing profile. Optionally, provide the name of the profile to import mods from]' \
+'--copy=[Copy over the mods from an existing profile. Optionally, provide the name of the profile to import mods from]' \
+'--duplicate=[Copy over the mods from an existing profile. Optionally, provide the name of the profile to import mods from]' \
+'-v+[The Minecraft version to check compatibility for]:GAME_VERSION: ' \
+'--game-version=[The Minecraft version to check compatibility for]:GAME_VERSION: ' \
+'-m+[The mod loader to check compatibility for]:MOD_LOADER:(quilt fabric forge neo-forge)' \
+'--mod-loader=[The mod loader to check compatibility for]:MOD_LOADER:(quilt fabric forge neo-forge)' \
+'-n+[The name of the profile]:NAME: ' \
+'--name=[The name of the profile]:NAME: ' \
+'-o+[The directory to output mods to]:OUTPUT_DIR:_files -/' \
+'--output-dir=[The directory to output mods to]:OUTPUT_DIR:_files -/' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(new)
+_arguments "${_arguments_options[@]}" : \
+'-i+[Copy over the mods from an existing profile. Optionally, provide the name of the profile to import mods from]' \
+'--import=[Copy over the mods from an existing profile. Optionally, provide the name of the profile to import mods from]' \
+'--copy=[Copy over the mods from an existing profile. Optionally, provide the name of the profile to import mods from]' \
+'--duplicate=[Copy over the mods from an existing profile. Optionally, provide the name of the profile to import mods from]' \
+'-v+[The Minecraft version to check compatibility for]:GAME_VERSION: ' \
+'--game-version=[The Minecraft version to check compatibility for]:GAME_VERSION: ' \
+'-m+[The mod loader to check compatibility for]:MOD_LOADER:(quilt fabric forge neo-forge)' \
+'--mod-loader=[The mod loader to check compatibility for]:MOD_LOADER:(quilt fabric forge neo-forge)' \
+'-n+[The name of the profile]:NAME: ' \
+'--name=[The name of the profile]:NAME: ' \
+'-o+[The directory to output mods to]:OUTPUT_DIR:_files -/' \
+'--output-dir=[The directory to output mods to]:OUTPUT_DIR:_files -/' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(delete)
+_arguments "${_arguments_options[@]}" : \
+'-s+[The name of the profile to switch to afterwards]:SWITCH_TO: ' \
+'--switch-to=[The name of the profile to switch to afterwards]:SWITCH_TO: ' \
+'-h[Print help]' \
+'--help[Print help]' \
+'::profile_name -- The name of the profile to delete:' \
+&& ret=0
+;;
+(remove)
+_arguments "${_arguments_options[@]}" : \
+'-s+[The name of the profile to switch to afterwards]:SWITCH_TO: ' \
+'--switch-to=[The name of the profile to switch to afterwards]:SWITCH_TO: ' \
+'-h[Print help]' \
+'--help[Print help]' \
+'::profile_name -- The name of the profile to delete:' \
+&& ret=0
+;;
+(rm)
+_arguments "${_arguments_options[@]}" : \
+'-s+[The name of the profile to switch to afterwards]:SWITCH_TO: ' \
+'--switch-to=[The name of the profile to switch to afterwards]:SWITCH_TO: ' \
+'-h[Print help]' \
+'--help[Print help]' \
+'::profile_name -- The name of the profile to delete:' \
+&& ret=0
+;;
+(info)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(switch)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+'::profile_name -- The name of the profile to switch to:' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+":: :_ferium__profile__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:ferium-profile-help-command-$line[1]:"
+        case $line[1] in
+            (configure)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(create)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(delete)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(info)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(switch)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+;;
+(profiles)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(remove)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+'*::mod_names -- List of project IDs or case-insensitive names of mods to remove:' \
+&& ret=0
+;;
+(rm)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+'*::mod_names -- List of project IDs or case-insensitive names of mods to remove:' \
+&& ret=0
+;;
+(upgrade)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(download)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(install)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+":: :_ferium__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:ferium-help-command-$line[1]:"
+        case $line[1] in
+            (add)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(scan)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(complete)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(modpack)
+_arguments "${_arguments_options[@]}" : \
+":: :_ferium__help__modpack_commands" \
+"*::: :->modpack" \
+&& ret=0
+
+    case $state in
+    (modpack)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:ferium-help-modpack-command-$line[1]:"
+        case $line[1] in
+            (add)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(configure)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(delete)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(info)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(switch)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(upgrade)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+(modpacks)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(profile)
+_arguments "${_arguments_options[@]}" : \
+":: :_ferium__help__profile_commands" \
+"*::: :->profile" \
+&& ret=0
+
+    case $state in
+    (profile)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:ferium-help-profile-command-$line[1]:"
+        case $line[1] in
+            (configure)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(create)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(delete)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(info)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(list)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(switch)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+(profiles)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(remove)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(upgrade)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+}
+
+(( $+functions[_ferium_commands] )) ||
+_ferium_commands() {
+    local commands; commands=(
+'add:Add mods to the profile' \
+'scan:Scan the profile'\''s output directory (or the specified directory) for mods and add them to the profile' \
+'complete:Print shell auto completions for the specified shell' \
+'list:List all the mods in the profile, and with some their metadata if verbose' \
+'mods:List all the mods in the profile, and with some their metadata if verbose' \
+'modpack:Add, configure, delete, switch, list, or upgrade modpacks' \
+'modpacks:List all the modpacks with their data' \
+'profile:Create, configure, delete, switch, or list profiles' \
+'profiles:List all the profiles with their data' \
+'remove:Remove mods and/or repositories from the profile. Optionally, provide a list of names or IDs of the mods to remove' \
+'rm:Remove mods and/or repositories from the profile. Optionally, provide a list of names or IDs of the mods to remove' \
+'upgrade:Download and install the latest compatible version of your mods' \
+'download:Download and install the latest compatible version of your mods' \
+'install:Download and install the latest compatible version of your mods' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'ferium commands' commands "$@"
+}
+(( $+functions[_ferium__add_commands] )) ||
+_ferium__add_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium add commands' commands "$@"
+}
+(( $+functions[_ferium__complete_commands] )) ||
+_ferium__complete_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium complete commands' commands "$@"
+}
+(( $+functions[_ferium__help_commands] )) ||
+_ferium__help_commands() {
+    local commands; commands=(
+'add:Add mods to the profile' \
+'scan:Scan the profile'\''s output directory (or the specified directory) for mods and add them to the profile' \
+'complete:Print shell auto completions for the specified shell' \
+'list:List all the mods in the profile, and with some their metadata if verbose' \
+'modpack:Add, configure, delete, switch, list, or upgrade modpacks' \
+'modpacks:List all the modpacks with their data' \
+'profile:Create, configure, delete, switch, or list profiles' \
+'profiles:List all the profiles with their data' \
+'remove:Remove mods and/or repositories from the profile. Optionally, provide a list of names or IDs of the mods to remove' \
+'upgrade:Download and install the latest compatible version of your mods' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'ferium help commands' commands "$@"
+}
+(( $+functions[_ferium__help__add_commands] )) ||
+_ferium__help__add_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium help add commands' commands "$@"
+}
+(( $+functions[_ferium__help__complete_commands] )) ||
+_ferium__help__complete_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium help complete commands' commands "$@"
+}
+(( $+functions[_ferium__help__help_commands] )) ||
+_ferium__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium help help commands' commands "$@"
+}
+(( $+functions[_ferium__help__list_commands] )) ||
+_ferium__help__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium help list commands' commands "$@"
+}
+(( $+functions[_ferium__help__modpack_commands] )) ||
+_ferium__help__modpack_commands() {
+    local commands; commands=(
+'add:Add a modpack to the config' \
+'configure:Configure the current modpack'\''s output directory and installation of overrides. Optionally, provide the settings to change as arguments' \
+'delete:Delete a modpack. Optionally, provide the name of the modpack to delete' \
+'info:Show information about the current modpack' \
+'list:List all the modpacks with their data' \
+'switch:Switch between different modpacks. Optionally, provide the name of the modpack to switch to' \
+'upgrade:Download and install the latest version of the modpack' \
+    )
+    _describe -t commands 'ferium help modpack commands' commands "$@"
+}
+(( $+functions[_ferium__help__modpack__add_commands] )) ||
+_ferium__help__modpack__add_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium help modpack add commands' commands "$@"
+}
+(( $+functions[_ferium__help__modpack__configure_commands] )) ||
+_ferium__help__modpack__configure_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium help modpack configure commands' commands "$@"
+}
+(( $+functions[_ferium__help__modpack__delete_commands] )) ||
+_ferium__help__modpack__delete_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium help modpack delete commands' commands "$@"
+}
+(( $+functions[_ferium__help__modpack__info_commands] )) ||
+_ferium__help__modpack__info_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium help modpack info commands' commands "$@"
+}
+(( $+functions[_ferium__help__modpack__list_commands] )) ||
+_ferium__help__modpack__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium help modpack list commands' commands "$@"
+}
+(( $+functions[_ferium__help__modpack__switch_commands] )) ||
+_ferium__help__modpack__switch_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium help modpack switch commands' commands "$@"
+}
+(( $+functions[_ferium__help__modpack__upgrade_commands] )) ||
+_ferium__help__modpack__upgrade_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium help modpack upgrade commands' commands "$@"
+}
+(( $+functions[_ferium__help__modpacks_commands] )) ||
+_ferium__help__modpacks_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium help modpacks commands' commands "$@"
+}
+(( $+functions[_ferium__help__profile_commands] )) ||
+_ferium__help__profile_commands() {
+    local commands; commands=(
+'configure:Configure the current profile'\''s name, Minecraft version, mod loader, and output directory. Optionally, provide the settings to change as arguments' \
+'create:Create a new profile. Optionally, provide the settings as arguments. Use the import flag to import mods from another profile' \
+'delete:Delete a profile. Optionally, provide the name of the profile to delete' \
+'info:Show information about the current profile' \
+'list:List all the profiles with their data' \
+'switch:Switch between different profiles. Optionally, provide the name of the profile to switch to' \
+    )
+    _describe -t commands 'ferium help profile commands' commands "$@"
+}
+(( $+functions[_ferium__help__profile__configure_commands] )) ||
+_ferium__help__profile__configure_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium help profile configure commands' commands "$@"
+}
+(( $+functions[_ferium__help__profile__create_commands] )) ||
+_ferium__help__profile__create_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium help profile create commands' commands "$@"
+}
+(( $+functions[_ferium__help__profile__delete_commands] )) ||
+_ferium__help__profile__delete_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium help profile delete commands' commands "$@"
+}
+(( $+functions[_ferium__help__profile__info_commands] )) ||
+_ferium__help__profile__info_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium help profile info commands' commands "$@"
+}
+(( $+functions[_ferium__help__profile__list_commands] )) ||
+_ferium__help__profile__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium help profile list commands' commands "$@"
+}
+(( $+functions[_ferium__help__profile__switch_commands] )) ||
+_ferium__help__profile__switch_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium help profile switch commands' commands "$@"
+}
+(( $+functions[_ferium__help__profiles_commands] )) ||
+_ferium__help__profiles_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium help profiles commands' commands "$@"
+}
+(( $+functions[_ferium__help__remove_commands] )) ||
+_ferium__help__remove_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium help remove commands' commands "$@"
+}
+(( $+functions[_ferium__help__scan_commands] )) ||
+_ferium__help__scan_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium help scan commands' commands "$@"
+}
+(( $+functions[_ferium__help__upgrade_commands] )) ||
+_ferium__help__upgrade_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium help upgrade commands' commands "$@"
+}
+(( $+functions[_ferium__list_commands] )) ||
+_ferium__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium list commands' commands "$@"
+}
+(( $+functions[_ferium__modpack_commands] )) ||
+_ferium__modpack_commands() {
+    local commands; commands=(
+'add:Add a modpack to the config' \
+'configure:Configure the current modpack'\''s output directory and installation of overrides. Optionally, provide the settings to change as arguments' \
+'config:Configure the current modpack'\''s output directory and installation of overrides. Optionally, provide the settings to change as arguments' \
+'conf:Configure the current modpack'\''s output directory and installation of overrides. Optionally, provide the settings to change as arguments' \
+'delete:Delete a modpack. Optionally, provide the name of the modpack to delete' \
+'remove:Delete a modpack. Optionally, provide the name of the modpack to delete' \
+'rm:Delete a modpack. Optionally, provide the name of the modpack to delete' \
+'info:Show information about the current modpack' \
+'list:List all the modpacks with their data' \
+'switch:Switch between different modpacks. Optionally, provide the name of the modpack to switch to' \
+'upgrade:Download and install the latest version of the modpack' \
+'download:Download and install the latest version of the modpack' \
+'install:Download and install the latest version of the modpack' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'ferium modpack commands' commands "$@"
+}
+(( $+functions[_ferium__modpack__add_commands] )) ||
+_ferium__modpack__add_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium modpack add commands' commands "$@"
+}
+(( $+functions[_ferium__modpack__configure_commands] )) ||
+_ferium__modpack__configure_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium modpack configure commands' commands "$@"
+}
+(( $+functions[_ferium__modpack__delete_commands] )) ||
+_ferium__modpack__delete_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium modpack delete commands' commands "$@"
+}
+(( $+functions[_ferium__modpack__help_commands] )) ||
+_ferium__modpack__help_commands() {
+    local commands; commands=(
+'add:Add a modpack to the config' \
+'configure:Configure the current modpack'\''s output directory and installation of overrides. Optionally, provide the settings to change as arguments' \
+'delete:Delete a modpack. Optionally, provide the name of the modpack to delete' \
+'info:Show information about the current modpack' \
+'list:List all the modpacks with their data' \
+'switch:Switch between different modpacks. Optionally, provide the name of the modpack to switch to' \
+'upgrade:Download and install the latest version of the modpack' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'ferium modpack help commands' commands "$@"
+}
+(( $+functions[_ferium__modpack__help__add_commands] )) ||
+_ferium__modpack__help__add_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium modpack help add commands' commands "$@"
+}
+(( $+functions[_ferium__modpack__help__configure_commands] )) ||
+_ferium__modpack__help__configure_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium modpack help configure commands' commands "$@"
+}
+(( $+functions[_ferium__modpack__help__delete_commands] )) ||
+_ferium__modpack__help__delete_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium modpack help delete commands' commands "$@"
+}
+(( $+functions[_ferium__modpack__help__help_commands] )) ||
+_ferium__modpack__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium modpack help help commands' commands "$@"
+}
+(( $+functions[_ferium__modpack__help__info_commands] )) ||
+_ferium__modpack__help__info_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium modpack help info commands' commands "$@"
+}
+(( $+functions[_ferium__modpack__help__list_commands] )) ||
+_ferium__modpack__help__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium modpack help list commands' commands "$@"
+}
+(( $+functions[_ferium__modpack__help__switch_commands] )) ||
+_ferium__modpack__help__switch_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium modpack help switch commands' commands "$@"
+}
+(( $+functions[_ferium__modpack__help__upgrade_commands] )) ||
+_ferium__modpack__help__upgrade_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium modpack help upgrade commands' commands "$@"
+}
+(( $+functions[_ferium__modpack__info_commands] )) ||
+_ferium__modpack__info_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium modpack info commands' commands "$@"
+}
+(( $+functions[_ferium__modpack__list_commands] )) ||
+_ferium__modpack__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium modpack list commands' commands "$@"
+}
+(( $+functions[_ferium__modpack__switch_commands] )) ||
+_ferium__modpack__switch_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium modpack switch commands' commands "$@"
+}
+(( $+functions[_ferium__modpack__upgrade_commands] )) ||
+_ferium__modpack__upgrade_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium modpack upgrade commands' commands "$@"
+}
+(( $+functions[_ferium__modpacks_commands] )) ||
+_ferium__modpacks_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium modpacks commands' commands "$@"
+}
+(( $+functions[_ferium__profile_commands] )) ||
+_ferium__profile_commands() {
+    local commands; commands=(
+'configure:Configure the current profile'\''s name, Minecraft version, mod loader, and output directory. Optionally, provide the settings to change as arguments' \
+'config:Configure the current profile'\''s name, Minecraft version, mod loader, and output directory. Optionally, provide the settings to change as arguments' \
+'conf:Configure the current profile'\''s name, Minecraft version, mod loader, and output directory. Optionally, provide the settings to change as arguments' \
+'create:Create a new profile. Optionally, provide the settings as arguments. Use the import flag to import mods from another profile' \
+'new:Create a new profile. Optionally, provide the settings as arguments. Use the import flag to import mods from another profile' \
+'delete:Delete a profile. Optionally, provide the name of the profile to delete' \
+'remove:Delete a profile. Optionally, provide the name of the profile to delete' \
+'rm:Delete a profile. Optionally, provide the name of the profile to delete' \
+'info:Show information about the current profile' \
+'list:List all the profiles with their data' \
+'switch:Switch between different profiles. Optionally, provide the name of the profile to switch to' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'ferium profile commands' commands "$@"
+}
+(( $+functions[_ferium__profile__configure_commands] )) ||
+_ferium__profile__configure_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium profile configure commands' commands "$@"
+}
+(( $+functions[_ferium__profile__create_commands] )) ||
+_ferium__profile__create_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium profile create commands' commands "$@"
+}
+(( $+functions[_ferium__profile__delete_commands] )) ||
+_ferium__profile__delete_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium profile delete commands' commands "$@"
+}
+(( $+functions[_ferium__profile__help_commands] )) ||
+_ferium__profile__help_commands() {
+    local commands; commands=(
+'configure:Configure the current profile'\''s name, Minecraft version, mod loader, and output directory. Optionally, provide the settings to change as arguments' \
+'create:Create a new profile. Optionally, provide the settings as arguments. Use the import flag to import mods from another profile' \
+'delete:Delete a profile. Optionally, provide the name of the profile to delete' \
+'info:Show information about the current profile' \
+'list:List all the profiles with their data' \
+'switch:Switch between different profiles. Optionally, provide the name of the profile to switch to' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'ferium profile help commands' commands "$@"
+}
+(( $+functions[_ferium__profile__help__configure_commands] )) ||
+_ferium__profile__help__configure_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium profile help configure commands' commands "$@"
+}
+(( $+functions[_ferium__profile__help__create_commands] )) ||
+_ferium__profile__help__create_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium profile help create commands' commands "$@"
+}
+(( $+functions[_ferium__profile__help__delete_commands] )) ||
+_ferium__profile__help__delete_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium profile help delete commands' commands "$@"
+}
+(( $+functions[_ferium__profile__help__help_commands] )) ||
+_ferium__profile__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium profile help help commands' commands "$@"
+}
+(( $+functions[_ferium__profile__help__info_commands] )) ||
+_ferium__profile__help__info_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium profile help info commands' commands "$@"
+}
+(( $+functions[_ferium__profile__help__list_commands] )) ||
+_ferium__profile__help__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium profile help list commands' commands "$@"
+}
+(( $+functions[_ferium__profile__help__switch_commands] )) ||
+_ferium__profile__help__switch_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium profile help switch commands' commands "$@"
+}
+(( $+functions[_ferium__profile__info_commands] )) ||
+_ferium__profile__info_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium profile info commands' commands "$@"
+}
+(( $+functions[_ferium__profile__list_commands] )) ||
+_ferium__profile__list_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium profile list commands' commands "$@"
+}
+(( $+functions[_ferium__profile__switch_commands] )) ||
+_ferium__profile__switch_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium profile switch commands' commands "$@"
+}
+(( $+functions[_ferium__profiles_commands] )) ||
+_ferium__profiles_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium profiles commands' commands "$@"
+}
+(( $+functions[_ferium__remove_commands] )) ||
+_ferium__remove_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium remove commands' commands "$@"
+}
+(( $+functions[_ferium__scan_commands] )) ||
+_ferium__scan_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium scan commands' commands "$@"
+}
+(( $+functions[_ferium__upgrade_commands] )) ||
+_ferium__upgrade_commands() {
+    local commands; commands=()
+    _describe -t commands 'ferium upgrade commands' commands "$@"
+}
+
+if [ "$funcstack[1]" = "_ferium" ]; then
+    _ferium "$@"
+else
+    compdef _ferium ferium
+fi
+
+#compdef packwiz
+compdef _packwiz packwiz
+
+# zsh completion for packwiz                              -*- shell-script -*-
+
+__packwiz_debug()
+{
+    local file="$BASH_COMP_DEBUG_FILE"
+    if [[ -n ${file} ]]; then
+        echo "$*" >> "${file}"
+    fi
+}
+
+_packwiz()
+{
+    local shellCompDirectiveError=1
+    local shellCompDirectiveNoSpace=2
+    local shellCompDirectiveNoFileComp=4
+    local shellCompDirectiveFilterFileExt=8
+    local shellCompDirectiveFilterDirs=16
+    local shellCompDirectiveKeepOrder=32
+
+    local lastParam lastChar flagPrefix requestComp out directive comp lastComp noSpace keepOrder
+    local -a completions
+
+    __packwiz_debug "\n========= starting completion logic =========="
+    __packwiz_debug "CURRENT: ${CURRENT}, words[*]: ${words[*]}"
+
+    # The user could have moved the cursor backwards on the command-line.
+    # We need to trigger completion from the $CURRENT location, so we need
+    # to truncate the command-line ($words) up to the $CURRENT location.
+    # (We cannot use $CURSOR as its value does not work when a command is an alias.)
+    words=("${=words[1,CURRENT]}")
+    __packwiz_debug "Truncated words[*]: ${words[*]},"
+
+    lastParam=${words[-1]}
+    lastChar=${lastParam[-1]}
+    __packwiz_debug "lastParam: ${lastParam}, lastChar: ${lastChar}"
+
+    # For zsh, when completing a flag with an = (e.g., packwiz -n=<TAB>)
+    # completions must be prefixed with the flag
+    setopt local_options BASH_REMATCH
+    if [[ "${lastParam}" =~ '-.*=' ]]; then
+        # We are dealing with a flag with an =
+        flagPrefix="-P ${BASH_REMATCH}"
+    fi
+
+    # Prepare the command to obtain completions
+    requestComp="${words[1]} __complete ${words[2,-1]}"
+    if [ "${lastChar}" = "" ]; then
+        # If the last parameter is complete (there is a space following it)
+        # We add an extra empty parameter so we can indicate this to the go completion code.
+        __packwiz_debug "Adding extra empty parameter"
+        requestComp="${requestComp} \"\""
+    fi
+
+    __packwiz_debug "About to call: eval ${requestComp}"
+
+    # Use eval to handle any environment variables and such
+    out=$(eval ${requestComp} 2>/dev/null)
+    __packwiz_debug "completion output: ${out}"
+
+    # Extract the directive integer following a : from the last line
+    local lastLine
+    while IFS='\n' read -r line; do
+        lastLine=${line}
+    done < <(printf "%s\n" "${out[@]}")
+    __packwiz_debug "last line: ${lastLine}"
+
+    if [ "${lastLine[1]}" = : ]; then
+        directive=${lastLine[2,-1]}
+        # Remove the directive including the : and the newline
+        local suffix
+        (( suffix=${#lastLine}+2))
+        out=${out[1,-$suffix]}
+    else
+        # There is no directive specified.  Leave $out as is.
+        __packwiz_debug "No directive found.  Setting do default"
+        directive=0
+    fi
+
+    __packwiz_debug "directive: ${directive}"
+    __packwiz_debug "completions: ${out}"
+    __packwiz_debug "flagPrefix: ${flagPrefix}"
+
+    if [ $((directive & shellCompDirectiveError)) -ne 0 ]; then
+        __packwiz_debug "Completion received error. Ignoring completions."
+        return
+    fi
+
+    local activeHelpMarker="_activeHelp_ "
+    local endIndex=${#activeHelpMarker}
+    local startIndex=$((${#activeHelpMarker}+1))
+    local hasActiveHelp=0
+    while IFS='\n' read -r comp; do
+        # Check if this is an activeHelp statement (i.e., prefixed with $activeHelpMarker)
+        if [ "${comp[1,$endIndex]}" = "$activeHelpMarker" ];then
+            __packwiz_debug "ActiveHelp found: $comp"
+            comp="${comp[$startIndex,-1]}"
+            if [ -n "$comp" ]; then
+                compadd -x "${comp}"
+                __packwiz_debug "ActiveHelp will need delimiter"
+                hasActiveHelp=1
+            fi
+
+            continue
+        fi
+
+        if [ -n "$comp" ]; then
+            # If requested, completions are returned with a description.
+            # The description is preceded by a TAB character.
+            # For zsh's _describe, we need to use a : instead of a TAB.
+            # We first need to escape any : as part of the completion itself.
+            comp=${comp//:/\\:}
+
+            local tab="$(printf '\t')"
+            comp=${comp//$tab/:}
+
+            __packwiz_debug "Adding completion: ${comp}"
+            completions+=${comp}
+            lastComp=$comp
+        fi
+    done < <(printf "%s\n" "${out[@]}")
+
+    # Add a delimiter after the activeHelp statements, but only if:
+    # - there are completions following the activeHelp statements, or
+    # - file completion will be performed (so there will be choices after the activeHelp)
+    if [ $hasActiveHelp -eq 1 ]; then
+        if [ ${#completions} -ne 0 ] || [ $((directive & shellCompDirectiveNoFileComp)) -eq 0 ]; then
+            __packwiz_debug "Adding activeHelp delimiter"
+            compadd -x "--"
+            hasActiveHelp=0
+        fi
+    fi
+
+    if [ $((directive & shellCompDirectiveNoSpace)) -ne 0 ]; then
+        __packwiz_debug "Activating nospace."
+        noSpace="-S ''"
+    fi
+
+    if [ $((directive & shellCompDirectiveKeepOrder)) -ne 0 ]; then
+        __packwiz_debug "Activating keep order."
+        keepOrder="-V"
+    fi
+
+    if [ $((directive & shellCompDirectiveFilterFileExt)) -ne 0 ]; then
+        # File extension filtering
+        local filteringCmd
+        filteringCmd='_files'
+        for filter in ${completions[@]}; do
+            if [ ${filter[1]} != '*' ]; then
+                # zsh requires a glob pattern to do file filtering
+                filter="\*.$filter"
+            fi
+            filteringCmd+=" -g $filter"
+        done
+        filteringCmd+=" ${flagPrefix}"
+
+        __packwiz_debug "File filtering command: $filteringCmd"
+        _arguments '*:filename:'"$filteringCmd"
+    elif [ $((directive & shellCompDirectiveFilterDirs)) -ne 0 ]; then
+        # File completion for directories only
+        local subdir
+        subdir="${completions[1]}"
+        if [ -n "$subdir" ]; then
+            __packwiz_debug "Listing directories in $subdir"
+            pushd "${subdir}" >/dev/null 2>&1
+        else
+            __packwiz_debug "Listing directories in ."
+        fi
+
+        local result
+        _arguments '*:dirname:_files -/'" ${flagPrefix}"
+        result=$?
+        if [ -n "$subdir" ]; then
+            popd >/dev/null 2>&1
+        fi
+        return $result
+    else
+        __packwiz_debug "Calling _describe"
+        if eval _describe $keepOrder "completions" completions $flagPrefix $noSpace; then
+            __packwiz_debug "_describe found some completions"
+
+            # Return the success of having called _describe
+            return 0
+        else
+            __packwiz_debug "_describe did not find completions."
+            __packwiz_debug "Checking if we should do file completion."
+            if [ $((directive & shellCompDirectiveNoFileComp)) -ne 0 ]; then
+                __packwiz_debug "deactivating file completion"
+
+                # We must return an error code here to let zsh know that there were no
+                # completions found by _describe; this is what will trigger other
+                # matching algorithms to attempt to find completions.
+                # For example zsh can match letters in the middle of words.
+                return 1
+            else
+                # Perform file completion
+                __packwiz_debug "Activating file completion"
+
+                # We must return the result of this command, so it must be the
+                # last command, or else we must store its result to return it.
+                _arguments '*:filename:_files'" ${flagPrefix}"
+            fi
+        fi
+    fi
+}
+
+# don't run the completion function when being source-ed or eval-ed
+if [ "$funcstack[1]" = "_packwiz" ]; then
+    _packwiz
+fi
