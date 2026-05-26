@@ -1,4 +1,4 @@
-{pkgs,perSystem, ...}: {
+{pkgs, perSystem, ...}: {
 	home.packages = with pkgs; [
 		git
 		firefox
@@ -31,7 +31,6 @@
 		nixd
 		xpaste
 		imagemagick
-		flameshot
 		gnupg
 		docker-credential-helpers
 		tmux
@@ -256,5 +255,12 @@
 		packwiz
 		koreader
 		typst
+		ksnip
+		scrot
+		tinymist
+		sqls
+		fritzing
+		whisperx
+		espeak
 	];
 }

@@ -75,6 +75,10 @@ return {
 					['Build Release'] = helpers.shell_handler(string.format('g++ -O2 -DNDEBUG -o %s %s', outname, filename)),
 					['Build debug'] = helpers.shell_handler(string.format('g++ -ggdb -o %s %s', outname, filename)),
 				})(buffer)
+			end,
+			typst = function(buffer)
+				require('runner.handlers.helpers').shell_handler('typst compile ' ..
+					vim.fn.expand('%'):gsub(' ', '\\ '):gsub("'", "\\'"))(buffer)
 			end
 		}
 	},

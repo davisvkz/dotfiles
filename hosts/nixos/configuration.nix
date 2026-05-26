@@ -106,6 +106,7 @@
 		proggyfonts
 		nerd-fonts.fira-code
 		nerd-fonts.droid-sans-mono
+		typstPackages.use-tabler-icons
 	];
 
 	imports = [
