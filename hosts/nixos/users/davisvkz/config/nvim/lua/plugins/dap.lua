@@ -36,5 +36,49 @@ return {
 		require("mason").setup()
 		require("mason-nvim-dap").setup(opts)
 		require("neodev").setup({library = { plugins = { "nvim-dap-ui" }, types = true },})
+
+		local dap = require('dap')
+		local dapui = require('dapui')
+
+		dapui.setup()
+
+		dap.listeners.before.attach.dapui_config = function() dapui.open() end
+		dap.listeners.before.launch.dapui_config = function() dapui.open() end
+		dap.listeners.before.event_terminated.dapui_config = function() dapui.close() end
+		dap.listeners.before.event_exited.dapui_config = function() dapui.close() end
+
+		-- C# / .NET com netcoredbg
+		dap.adapters.coreclr = {
+			type = 'executable',
+			command = 'netcoredbg',
+			args = { '--interpreter=vscode' },
+		}
+
+		dap.configurations.cs = {
+			{
+				type = 'coreclr',
+				name = 'Launch',
+				request = 'launch',
+				program = function()
+					return vim.fn.input('DLL: ', vim.fn.getcwd() .. '/bin/Debug/', 'file')
+				end,
+			},
+			{
+				type = 'coreclr',
+				name = 'Attach',
+				request = 'attach',
+				processId = require('dap.utils').pick_process,
+			},
+		}
+
+		vim.keymap.set('n', '<F5>', dap.continue)
+		vim.keymap.set('n', '<F10>', dap.step_over)
+		vim.keymap.set('n', '<F11>', dap.step_into)
+		vim.keymap.set('n', '<F12>', dap.step_out)
+		vim.keymap.set('n', '<leader>db', dap.toggle_breakpoint)
+		vim.keymap.set('n', '<leader>dB', function()
+			dap.set_breakpoint(vim.fn.input('Condition: '))
+		end)
+		vim.keymap.set('n', '<leader>du', dapui.toggle)
 	end
 }

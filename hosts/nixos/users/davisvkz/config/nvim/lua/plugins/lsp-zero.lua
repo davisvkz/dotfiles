@@ -68,9 +68,28 @@ return {
 		})
 
 		vim.lsp.config('nixd', {
-			cmd = { 'nixd' }, -- ou caminho absoluto se necessário
+			cmd = { 'nixd' },
 			filetypes = { 'nix' },
 			root_markers= {'flake.nix','shell.nix','.git'}
+		})
+
+		local omnisharp_ok, omnisharp_extended = pcall(require, 'omnisharp_extended')
+		require('lspconfig').omnisharp.setup({
+			cmd = { 'OmniSharp' },
+			capabilities = require('cmp_nvim_lsp').default_capabilities(),
+			settings = {
+				FormattingOptions = {
+					EnableEditorConfigSupport = true,
+					OrganizeImports = true,
+				},
+				RoslynExtensionsOptions = {
+					EnableAnalyzersSupport = true,
+					EnableImportCompletion = true,
+				},
+			},
+			handlers = omnisharp_ok and {
+				['textDocument/definition'] = omnisharp_extended.handler,
+			} or nil,
 		})
 
 		local cmp = require('cmp')

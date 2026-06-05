@@ -14,6 +14,7 @@
 				javascript = { "prettier" },
 				javascriptreact = { "prettier" },
 				nix = { "alejandra" },
+				cs = { "csharpier" },
 			},
 			formatters = {
 				prettier = {

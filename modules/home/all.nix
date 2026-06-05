@@ -264,5 +264,13 @@
 		espeak
 		tabbed
 		xvfb-run
+
+		# C# / .NET
+		dotnet-sdk_9
+		omnisharp-roslyn
+		netcoredbg
+		csharpier
+		jetbrains.rider
+		jetbrains-toolbox
 	];
 }
