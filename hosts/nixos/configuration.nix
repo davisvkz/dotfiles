@@ -10,9 +10,50 @@
 	};
 	programs.nix-ld.enable = true;
 
-	programs.nix-ld.libraries = with pkgs; [
-		nodejs
-	];
+programs.nix-ld.libraries = with pkgs; [
+  nodejs
+  glib
+  glibc
+  nss
+  nspr
+  systemd # libudev.so.1
+  libsecret
+  libnotify
+  libGL
+  vulkan-loader
+  zlib
+  at-spi2-atk
+  at-spi2-core
+  cups
+  dbus
+  expat
+  libdrm
+  libgbm
+  mesa
+  libxkbcommon
+  pango
+  cairo
+  alsa-lib
+  gtk3
+  gdk-pixbuf
+  atk
+  fontconfig
+  freetype
+] ++ (with xorg; [
+  libX11
+  libXcomposite
+  libXdamage
+  libXext
+  libXfixes
+  libXrandr
+  libXrender
+  libxcb
+  libXScrnSaver
+  libXtst
+  libXi
+  libXcursor
+  libxshmfence
+]);
 	programs.gnupg.agent = {
 		enable = true;
 		pinentryPackage = pkgs.pinentry-rofi;
@@ -107,6 +148,7 @@
 		nerd-fonts.fira-code
 		nerd-fonts.droid-sans-mono
 		typstPackages.use-tabler-icons
+		ibm-plex
 	];
 
 	imports = [

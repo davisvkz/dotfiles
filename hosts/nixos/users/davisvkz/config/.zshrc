@@ -1,3 +1,17 @@
+copy-file() {
+  python3 - "$@" <<'PY' | xclip -selection clipboard -t text/uri-list
+import pathlib, sys
+print("\n".join(pathlib.Path(p).resolve().as_uri() for p in sys.argv[1:]), end="\n")
+PY
+}
+
+copy-file-gnome() {
+  python3 - "$@" <<'PY' | xclip -selection clipboard -t x-special/gnome-copied-files
+import pathlib, sys
+print("copy")
+print("\n".join(pathlib.Path(p).resolve().as_uri() for p in sys.argv[1:]), end="\n")
+PY
+}
 # pnpm
 export PNPM_HOME="/home/davisvkz/.local/share/pnpm"
 case ":$PATH:" in

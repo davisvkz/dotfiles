@@ -5,7 +5,6 @@
 	...
 }: let
 	homeDir = "/home/davisvkz";
-	storePath = "${homeDir}/.password-store";
 in {
 	nixpkgs.config.allowUnfree = true;
 	xdg = {
@@ -87,6 +86,9 @@ in {
 		shell.enableZshIntegration = true;
 		sessionVariables = {
 			PLANTUML_JAR = "${pkgs.plantuml}/lib/plantuml.jar";
+			PLAYWRIGHT_BROWSERS_PATH = "${pkgs.playwright-driver.browsers}";
+			PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD = "1";
+			PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS = "1";
 		};
 	};
 
@@ -141,13 +143,6 @@ in {
 		indicator = true;
 	};
 
-	home.file.".cache/ms-playwright" = let
-		browsers =
-			(builtins.fromJSON (builtins.readFile "${pkgs.playwright-driver}/browsers.json")).browsers;
-		chromium-rev = (builtins.head (builtins.filter (x: x.name == "chromium") browsers)).revision;
-	in {
-		source = pkgs.playwright-driver.browsers;
-		recursive = true;
-	};
+	home.file.".cache/ms-playwright".source = pkgs.playwright-driver.browsers;
 	home.stateVersion = "26.05";
 }

@@ -262,5 +262,7 @@
 		fritzing
 		whisperx
 		espeak
+		tabbed
+		xvfb-run
 	];
 }
