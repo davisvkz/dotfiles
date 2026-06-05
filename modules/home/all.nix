@@ -272,5 +272,6 @@
 		csharpier
 		jetbrains.rider
 		jetbrains-toolbox
+		gnupg
 	];
 }

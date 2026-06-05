@@ -144,5 +144,23 @@ in {
 	};
 
 	home.file.".cache/ms-playwright".source = pkgs.playwright-driver.browsers;
+
+	home.packages = [
+		inputs.winapps.packages.${pkgs.system}.winapps
+		inputs.winapps.packages.${pkgs.system}.winapps-launcher
+	];
+
+	home.file.".config/winapps/winapps.conf".text = ''
+		RDP_USER="windows"
+		RDP_PASS="Windows@12345"
+		RDP_DOMAIN=""
+		RDP_IP="127.0.0.1"
+		RDP_PORT="3389"
+		MULTIMON="off"
+		FREERDP_FLAGS="/clipboard /cert:ignore /gdi:hw"
+		WAFLAVOR="docker"
+		VM_NAME="RDPWindows"
+	'';
+
 	home.stateVersion = "26.05";
 }

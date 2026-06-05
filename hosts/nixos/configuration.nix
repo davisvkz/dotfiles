@@ -100,15 +100,10 @@ programs.nix-ld.libraries = with pkgs; [
 	};
 	virtualisation = {
 		libvirtd = {
+			enable = true;
 			qemu = {
-				package = pkgs.qemu_kvm; # only emulates host arch, smaller download
-				swtpm.enable = true; # allows for creating emulated TPM
-				ovmf.packages = [
-					(pkgs.OVMF.override {
-							secureBoot = true;
-							tpmSupport = true;
-						}).fd
-				]; # or use pkgs.OVMFFull.fd, which enables more stuff
+				package = pkgs.qemu_kvm;
+				swtpm.enable = true;
 			};
 		};
 		docker = {
@@ -236,7 +231,7 @@ programs.nix-ld.libraries = with pkgs; [
 
 	system.stateVersion = "25.11";
 	networking.firewall.enable = true;
-	networking.firewall.allowedTCPPorts = [8080];
+	networking.firewall.allowedTCPPorts = [8080 3389];
 	services.libinput = {
 		enable = true;
 		touchpad = {

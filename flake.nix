@@ -33,6 +33,11 @@
 			url = "github:numtide/llm-agents.nix";
 		};
 
+		winapps = {
+			url = "github:winapps-org/winapps";
+			inputs.nixpkgs.follows = "nixpkgs";
+		};
+
 		blueprint.url = "github:numtide/blueprint";
 		blueprint.inputs.nixpkgs.follows = "nixpkgs";
 	};
