@@ -74,8 +74,17 @@ return {
 		})
 
 		local omnisharp_ok, omnisharp_extended = pcall(require, 'omnisharp_extended')
-		require('lspconfig').omnisharp.setup({
-			cmd = { 'OmniSharp' },
+		vim.lsp.config('omnisharp', {
+			cmd = {
+				'OmniSharp',
+				'-z',
+				'--hostPID',
+				tostring(vim.fn.getpid()),
+				'DotNet:enablePackageRestore=false',
+				'--encoding',
+				'utf-8',
+				'--languageserver',
+			},
 			capabilities = require('cmp_nvim_lsp').default_capabilities(),
 			settings = {
 				FormattingOptions = {
@@ -88,7 +97,10 @@ return {
 				},
 			},
 			handlers = omnisharp_ok and {
-				['textDocument/definition'] = omnisharp_extended.handler,
+				['textDocument/definition'] = omnisharp_extended.definition_handler,
+				['textDocument/typeDefinition'] = omnisharp_extended.type_definition_handler,
+				['textDocument/references'] = omnisharp_extended.references_handler,
+				['textDocument/implementation'] = omnisharp_extended.implementation_handler,
 			} or nil,
 		})
 

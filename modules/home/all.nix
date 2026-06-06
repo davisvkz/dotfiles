@@ -1,4 +1,7 @@
 {pkgs, perSystem, ...}: {
+	home.sessionVariables = {
+		OMNISHARP_MONO = "${pkgs.mono}/bin/mono";
+	};
 	home.packages = with pkgs; [
 		git
 		firefox
@@ -266,8 +269,9 @@
 		xvfb-run
 
 		# C# / .NET
-		dotnet-sdk_9
+		dotnet-sdk_10
 		omnisharp-roslyn
+		mono
 		netcoredbg
 		csharpier
 		jetbrains.rider
