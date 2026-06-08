@@ -39,6 +39,7 @@ programs.nix-ld.libraries = with pkgs; [
   atk
   fontconfig
   freetype
+  openssl
 ] ++ (with xorg; [
   libX11
   libXcomposite
