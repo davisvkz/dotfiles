@@ -1,9 +1,12 @@
 {pkgs, perSystem, ...}: {
+	nixpkgs.config.permittedInsecurePackages = [
+		"olm-3.2.16"
+	];
 	home.sessionVariables = {
 		OMNISHARP_MONO = "${pkgs.mono}/bin/mono";
-		PRISMA_SCHEMA_ENGINE_BINARY = "${pkgs.prisma-engines}/bin/schema-engine";
-		# Library engine for the Prisma CLI (nixpkgs only ships schema-engine).
-		# Download the correct version with: apps/server/scripts/download-prisma-engine.sh
+		# Both engines are downloaded via: cd apps/server && bun run db:download-engine
+		# nixpkgs ships prisma-engines for the latest Prisma major; pinned versions avoid mismatch.
+		PRISMA_SCHEMA_ENGINE_BINARY = "$HOME/.local/share/prisma/schema-engine";
 		PRISMA_QUERY_ENGINE_LIBRARY = "$HOME/.local/share/prisma/libquery_engine.so.node";
 		PRISMA_ENGINES_CHECKSUM_IGNORE_MISSING = "1";
 		# Allow non-NixOS .so files (like Prisma's library engine) to find system libs.
@@ -285,5 +288,9 @@
 		jetbrains-toolbox
 		gnupg
 		railway
+		prisma
+		element-desktop
+		matrix-commander-rs
+		gomuks
 	];
 }

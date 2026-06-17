@@ -40,6 +40,7 @@ programs.nix-ld.libraries = with pkgs; [
   fontconfig
   freetype
   openssl
+	prisma-engines
 ] ++ (with xorg; [
   libX11
   libXcomposite
@@ -223,6 +224,9 @@ programs.nix-ld.libraries = with pkgs; [
 	nix.settings.experimental-features = ["nix-command" "flakes"];
 
 	nixpkgs.config.allowUnfree = true;
+	nixpkgs.config.permittedInsecurePackages = [
+		"olm-3.2.16"
+	];
 
 	environment.systemPackages = with pkgs; [
 		home-manager
@@ -232,7 +236,7 @@ programs.nix-ld.libraries = with pkgs; [
 
 	system.stateVersion = "25.11";
 	networking.firewall.enable = true;
-	networking.firewall.allowedTCPPorts = [8080 3389];
+	networking.firewall.allowedTCPPorts = [8080 3389 5173];
 	services.libinput = {
 		enable = true;
 		touchpad = {
