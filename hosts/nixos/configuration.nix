@@ -118,6 +118,10 @@ programs.nix-ld.libraries = with pkgs; [
 			#setSocketVariable = true;
 			#};
 		};
+		virtualbox.host = {
+			enable = true;
+			enableExtensionPack = true;
+		};
 	};
 
 	programs.mtr.enable = true;
@@ -208,7 +212,7 @@ programs.nix-ld.libraries = with pkgs; [
 	users.users.davisvkz = {
 		isNormalUser = true;
 		description = "Davi Silva Viana";
-		extraGroups = ["networkmanager" "wheel" "docker" "libvirtd" "kvm"];
+		extraGroups = ["networkmanager" "wheel" "docker" "libvirtd" "kvm" "vboxusers"];
 		shell = pkgs.zsh;
 	};
 
