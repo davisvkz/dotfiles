@@ -1,0 +1,10 @@
+# OMC runtime state
+.omc/
+hosts/*/.omc/
+
+# Neovim LSP log
+hosts/*/users/*/config/nvim/lsp.log
+
+# Nix build outputs
+result
+result-*

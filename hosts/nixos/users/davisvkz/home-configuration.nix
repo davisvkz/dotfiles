@@ -3,10 +3,9 @@
 	pkgs,
 	lib,
 	flake,
+	osConfig,
 	...
-}: let
-	homeDir = "/home/davisvkz";
-in {
+}: {
 	imports = [
 		inputs.spicetify-nix.homeManagerModules.default
 		"${flake}/modules/home/all.nix"
@@ -15,7 +14,23 @@ in {
 	# ── Profiles ────────────────────────────────────────────────────────────────
 	profiles = {
 		cli.enable = true;
-		dev.enable = true;
+		dev = {
+			core.enable = true;
+			js.enable = true;
+			python.enable = true;
+			rust.enable = true;
+			go.enable = true;
+			dotnet.enable = true;
+			jvm.enable = true;
+			cpp.enable = true;
+			lua.enable = true;
+			db.enable = true;
+			docker.enable = true;
+			http.enable = true;
+			web.enable = true;
+			infra.enable = true;
+			fun.enable = true;
+		};
 		gaming.enable = true;
 		media.enable = true;
 		security.enable = true;
@@ -23,11 +38,12 @@ in {
 		chat.enable = true;
 		browsers.enable = true;
 		desktop.enable = true;
-		apps.enable = true;
+		apps = {
+			enable = true;
+			winapps.enable = true;
+		};
+		theme.enable = true;
 	};
-
-	nixpkgs.config.allowUnfree = true;
-	nixpkgs.config.permittedInsecurePackages = ["olm-3.2.16"];
 
 	# ── XDG ─────────────────────────────────────────────────────────────────────
 	xdg = {
@@ -59,15 +75,10 @@ in {
 
 	# ── Identity ────────────────────────────────────────────────────────────────
 	home = {
-		username = "davisvkz";
-		homeDirectory = homeDir; # Required - use --impure
 		shellAliases = {magick_cli = "magick";};
 		shell.enableZshIntegration = true;
 		sessionVariables = {
 			PLANTUML_JAR = "${pkgs.plantuml}/lib/plantuml.jar";
-			PLAYWRIGHT_BROWSERS_PATH = "${pkgs.playwright-driver.browsers}";
-			PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD = "1";
-			PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS = "1";
 		};
 	};
 
@@ -92,7 +103,7 @@ in {
 		enabledCustomApps = with spicePkgs.apps; [newReleases ncsVisualizer];
 		enabledSnippets = with spicePkgs.snippets; [rotatingCoverart pointer];
 		theme = spicePkgs.themes.catppuccin;
-		colorScheme = "mocha";
+		colorScheme = osConfig.settings.theme.spicetifyScheme;
 	};
 
 	# ── GPG ─────────────────────────────────────────────────────────────────────
@@ -116,8 +127,8 @@ in {
 	programs.git = {
 		enable = true;
 		settings.user = {
-			email = "davissviana2006@gmail.com";
-			name = "davisvkz";
+			email = osConfig.settings.identity.email;
+			name = osConfig.settings.identity.username;
 		};
 	};
 	programs.gh = {
@@ -147,15 +158,6 @@ in {
 		enable = true;
 		indicator = true;
 	};
-
-	# ── Playwright browser cache ─────────────────────────────────────────────────
-	home.file.".cache/ms-playwright".source = pkgs.playwright-driver.browsers;
-
-	# ── WinApps ─────────────────────────────────────────────────────────────────
-	home.packages = [
-		inputs.winapps.packages.${pkgs.system}.winapps
-		inputs.winapps.packages.${pkgs.system}.winapps-launcher
-	];
 
 	# ── Misc ────────────────────────────────────────────────────────────────────
 	programs.home-manager.enable = true;

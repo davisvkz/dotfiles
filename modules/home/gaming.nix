@@ -22,8 +22,6 @@ in {
 			packwiz
 
 			# Wine / Proton
-			protontricks
-			steamtinkerlaunch
 			winetricks
 			wineWow64Packages.stable
 			dxvk

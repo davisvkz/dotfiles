@@ -40,7 +40,6 @@ in {
 			yad
 			gcr
 			pear-desktop
-			ytmdesktop
 			anydesk
 			qrcode
 			zbar
@@ -63,8 +62,6 @@ in {
 			freerdp
 			noip
 
-			# Utilitários de sistema
-			bluez
 		];
 	};
 }

@@ -5,6 +5,7 @@
 	...
 }: let
 	cfg = config.profiles.desktop;
+	homeDir = config.settings.identity.homeDirectory;
 in {
 	options.profiles.desktop.enable = lib.mkEnableOption "Desktop environment (bspwm/SDDM/picom)";
 
@@ -24,8 +25,8 @@ in {
 			};
 			windowManager.bspwm = {
 				enable = true;
-				configFile = "/home/davisvkz/.config/bspwm/bspwmrc";
-				sxhkd.configFile = "/home/davisvkz/.config/sxhkd/sxhkdrc";
+				configFile = "${homeDir}/.config/bspwm/bspwmrc";
+				sxhkd.configFile = "${homeDir}/.config/sxhkd/sxhkdrc";
 			};
 		};
 
@@ -56,35 +57,5 @@ in {
 				clickMethod = "buttonareas";
 			};
 		};
-
-		fonts.fontconfig = {
-			enable = true;
-			defaultFonts = {
-				sansSerif = ["Noto Sans CJK SC" "Noto Color Emoji" "Fira Code Nerd Font" "Material Design Icons Desktop"];
-				serif = ["Merriweather" "Fira Code Nerd Font" "Noto Color Emoji" "Material Design Icons Desktop"];
-				monospace = ["Fira Code Nerd Font" "Noto Color Emoji" "Material Design Icons Desktop"];
-				emoji = ["Noto Color Emoji" "Material Design Icons Desktop"];
-			};
-		};
-
-		fonts.packages = with pkgs; [
-			freefont_ttf
-			freetype
-			merriweather
-			noto-fonts
-			noto-fonts-color-emoji
-			noto-fonts-cjk-sans
-			liberation_ttf
-			source-sans-pro
-			newcomputermodern
-			cm_unicode
-			mplus-outline-fonts.githubRelease
-			dina-font
-			proggyfonts
-			nerd-fonts.fira-code
-			nerd-fonts.droid-sans-mono
-			typstPackages.use-tabler-icons
-			ibm-plex
-		];
 	};
 }

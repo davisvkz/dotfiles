@@ -1,7 +1,21 @@
 { ... }: {
 	imports = [
 		./cli.nix
-		./dev.nix
+		./dev/core.nix
+		./dev/js.nix
+		./dev/python.nix
+		./dev/rust.nix
+		./dev/go.nix
+		./dev/dotnet.nix
+		./dev/jvm.nix
+		./dev/cpp.nix
+		./dev/lua.nix
+		./dev/db.nix
+		./dev/docker.nix
+		./dev/http.nix
+		./dev/web.nix
+		./dev/infra.nix
+		./dev/fun.nix
 		./gaming.nix
 		./media.nix
 		./security.nix
@@ -10,5 +24,7 @@
 		./browsers.nix
 		./desktop.nix
 		./apps.nix
+		./apps/winapps.nix
+		./theme.nix
 	];
 }

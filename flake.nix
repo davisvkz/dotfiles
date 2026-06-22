@@ -25,5 +25,9 @@
 	outputs = inputs:
 		inputs.blueprint {
 			inherit inputs;
+			nixpkgs.config = {
+				allowUnfree = true;
+				permittedInsecurePackages = ["olm-3.2.16"];
+			};
 		};
 }

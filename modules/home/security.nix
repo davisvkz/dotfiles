@@ -15,7 +15,6 @@ in {
 			gobuster
 			dirb
 			sherlock
-			ldb
 
 			# Exploração / análise
 			metasploit

@@ -20,7 +20,7 @@ in {
 			docker = {
 				enable = true;
 				daemon.settings = {
-					dns = ["1.1.1.1" "8.8.8.8" "1.0.0.1" "8.8.4.4"];
+					dns = config.settings.dns;
 				};
 			};
 			virtualbox.host = {
