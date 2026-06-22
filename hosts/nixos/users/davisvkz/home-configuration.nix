@@ -6,7 +6,26 @@
 }: let
 	homeDir = "/home/davisvkz";
 in {
-	nixpkgs.config.allowUnfree = true;
+	imports = [
+		inputs.spicetify-nix.homeManagerModules.default
+		"${flake}/modules/home/all.nix"
+	];
+
+	# ── Profiles ────────────────────────────────────────────────────────────────
+	profiles = {
+		cli.enable = true;
+		dev.enable = true;
+		gaming.enable = true;
+		media.enable = true;
+		security.enable = true;
+		latex.enable = true;
+		chat.enable = true;
+		browsers.enable = true;
+		desktop.enable = true;
+		apps.enable = true;
+	};
+
+	# ── XDG ─────────────────────────────────────────────────────────────────────
 	xdg = {
 		enable = true;
 		desktopEntries = {
@@ -33,55 +52,11 @@ in {
 			};
 		};
 	};
-	imports = [inputs.spicetify-nix.homeManagerModules.default "${flake}/modules/home/all.nix"];
 
-	dconf.enable = true;
-	dconf.settings = {
-		"org/gnome/desktop/interface" = {color-scheme = "prefer-dark";};
-	};
-
-	gtk = {
-		enable = true;
-		theme = {
-			name = "Adwaita-dark";
-			package = pkgs.gnome-themes-extra;
-		};
-		gtk3.extraConfig.gtk-application-prefer-dark-theme = 1;
-		gtk4.extraConfig.gtk-application-prefer-dark-theme = 1;
-	};
-	qt = {
-		enable = true;
-		style = {name = "adwaita-dark";};
-	};
-	#programs.gnupg = {
-	#enable = true;
-	#enableSSHSupport = true;
-	#};
-	programs.spicetify = let
-		spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
-	in {
-		enable = true;
-		enabledExtensions = with spicePkgs.extensions; [
-			adblock
-			hidePodcasts
-			shuffle # shuffle+ (special characters are sanitized out of extension names)
-		];
-		enabledCustomApps = with spicePkgs.apps; [newReleases ncsVisualizer];
-		enabledSnippets = with spicePkgs.snippets; [rotatingCoverart pointer];
-
-		theme = spicePkgs.themes.catppuccin;
-		colorScheme = "mocha";
-	};
-	programs.gpg = {enable = true;};
-	services.gpg-agent = {
-		enable = true;
-		enableSshSupport = true;
-		pinentry = {package = pkgs.pinentry-rofi;};
-	};
-
+	# ── Identity ────────────────────────────────────────────────────────────────
 	home = {
 		username = "davisvkz";
-		homeDirectory = "/home/davisvkz"; # Required - use --impure
+		homeDirectory = homeDir; # Required - use --impure
 		shellAliases = {magick_cli = "magick";};
 		shell.enableZshIntegration = true;
 		sessionVariables = {
@@ -92,11 +67,38 @@ in {
 		};
 	};
 
+	# ── Shell ───────────────────────────────────────────────────────────────────
 	home.file.".config/zsh/.zshrc".source = ./config/.zshrc;
 	programs.zsh = {
 		enable = true;
 		dotDir = homeDir;
 	};
+
+	# ── Spicetify ───────────────────────────────────────────────────────────────
+	programs.spicetify = let
+		spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
+	in {
+		enable = true;
+		enabledExtensions = with spicePkgs.extensions; [
+			adblock
+			hidePodcasts
+			shuffle
+		];
+		enabledCustomApps = with spicePkgs.apps; [newReleases ncsVisualizer];
+		enabledSnippets = with spicePkgs.snippets; [rotatingCoverart pointer];
+		theme = spicePkgs.themes.catppuccin;
+		colorScheme = "mocha";
+	};
+
+	# ── GPG ─────────────────────────────────────────────────────────────────────
+	programs.gpg = {enable = true;};
+	services.gpg-agent = {
+		enable = true;
+		enableSshSupport = true;
+		pinentry = {package = pkgs.pinentry-rofi;};
+	};
+
+	# ── Password store ──────────────────────────────────────────────────────────
 	programs.password-store = {
 		enable = true;
 		package =
@@ -104,6 +106,8 @@ in {
 			(exts: with exts; [pass-otp pass-import pass-audit]);
 	};
 	services.pass-secret-service = {enable = true;};
+
+	# ── Git ─────────────────────────────────────────────────────────────────────
 	programs.git = {
 		enable = true;
 		settings.user = {
@@ -115,6 +119,8 @@ in {
 		enable = true;
 		gitCredentialHelper = {enable = true;};
 	};
+
+	# ── Neovim ──────────────────────────────────────────────────────────────────
 	programs.neovim = {
 		enable = true;
 		extraLuaPackages = ps: [ps.magick];
@@ -126,29 +132,29 @@ in {
 		withPython3 = true;
 		withRuby = true;
 	};
-
 	home.file.".config/nvim" = {
 		source = ./config/nvim;
 		recursive = true;
 	};
 
-	programs.home-manager.enable = true;
-
-	systemd.user.startServices = "sd-switch";
-	xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk];
-	xdg.portal.config.common.default = "gtk";
-
+	# ── KDE Connect ─────────────────────────────────────────────────────────────
 	services.kdeconnect = {
 		enable = true;
 		indicator = true;
 	};
 
+	# ── Playwright browser cache ─────────────────────────────────────────────────
 	home.file.".cache/ms-playwright".source = pkgs.playwright-driver.browsers;
 
+	# ── WinApps ─────────────────────────────────────────────────────────────────
 	home.packages = [
 		inputs.winapps.packages.${pkgs.system}.winapps
 		inputs.winapps.packages.${pkgs.system}.winapps-launcher
 	];
+
+	# ── Misc ────────────────────────────────────────────────────────────────────
+	programs.home-manager.enable = true;
+	systemd.user.startServices = "sd-switch";
 
 	home.stateVersion = "26.05";
 }
