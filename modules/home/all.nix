@@ -292,5 +292,7 @@
 		element-desktop
 		matrix-commander-rs
 		gomuks
+		noip
+		git-filter-repo
 	];
 }

@@ -11,6 +11,7 @@
 	programs.nix-ld.enable = true;
 
 programs.nix-ld.libraries = with pkgs; [
+	typst
   nodejs
   glib
   glibc
@@ -240,7 +241,7 @@ programs.nix-ld.libraries = with pkgs; [
 
 	system.stateVersion = "25.11";
 	networking.firewall.enable = true;
-	networking.firewall.allowedTCPPorts = [8080 3389 5173];
+	networking.firewall.allowedTCPPorts = [8080 5984];
 	services.libinput = {
 		enable = true;
 		touchpad = {
