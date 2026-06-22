@@ -1,6 +1,7 @@
 {
 	inputs,
 	pkgs,
+	lib,
 	flake,
 	...
 }: let
@@ -15,11 +16,11 @@ in {
 	profiles = {
 		cli.enable = true;
 		dev.enable = true;
-		gaming.enable = false;
-		media.enable = false;
-		security.enable = false;
-		latex.enable = false;
-		chat.enable = false;
+		gaming.enable = true;
+		media.enable = true;
+		security.enable = true;
+		latex.enable = true;
+		chat.enable = true;
 		browsers.enable = true;
 		desktop.enable = true;
 		apps.enable = true;
@@ -71,10 +72,11 @@ in {
 	};
 
 	# ── Shell ───────────────────────────────────────────────────────────────────
-	home.file.".config/zsh/.zshrc".source = ./config/.zshrc;
 	programs.zsh = {
 		enable = true;
-		dotDir = homeDir;
+		# dotDir não sobrescrito: com xdg.enable + stateVersion 26.05 o default
+		# é ~/.config/zsh, fazendo o HM exportar ZDOTDIR de forma confiável.
+		initContent = lib.mkAfter (builtins.readFile ./config/.zshrc);
 	};
 
 	# ── Spicetify ───────────────────────────────────────────────────────────────

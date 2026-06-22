@@ -91,7 +91,6 @@ in {
 			postgresql
 			dbeaver-bin
 			lazysql
-			gobang
 			termdbms
 			supabase-cli
 			prisma
