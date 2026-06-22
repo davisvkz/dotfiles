@@ -14,12 +14,6 @@ in {
 			shell = pkgs.zsh;
 		};
 
-		programs.gnupg.agent = {
-			enable = true;
-			pinentryPackage = pkgs.pinentry-rofi;
-			enableSSHSupport = true;
-		};
-
 		programs.zsh.enable = true;
 	};
 }

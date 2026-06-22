@@ -8,28 +8,29 @@
 in {
 	options.profiles.latex.enable = lib.mkEnableOption "LaTeX, Typst and document tools";
 
-	config = lib.mkIf cfg.enable {
-		home.packages = with pkgs; [
-			# LaTeX
-			texliveFull
-			texstudio
-			texmaker
+	config =
+		lib.mkIf cfg.enable {
+			home.packages = with pkgs; [
+				# LaTeX
+				texliveFull
+				texstudio
+				texmaker
 
-			# Typst
-			typst
-			tinymist
+				# Typst
+				typst
+				tinymist
 
-			# Alternativas
-			tectonic
+				# Alternativas
+				tectonic
 
-			# Conversão / diagrama
-			pandoc
-			pandoc-plantuml-filter
-			plantuml-c4
-			graphviz
+				# Conversão / diagrama
+				pandoc
+				pandoc-plantuml-filter
+				plantuml-c4
+				graphviz
 
-			# PDF
-			poppler-utils
-		];
-	};
+				# PDF
+				poppler-utils
+			];
+		};
 }

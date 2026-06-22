@@ -15,7 +15,7 @@
 	boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "nvme" "usb_storage" "usbhid" "sd_mod" "rtsx_pci_sdmmc"];
 	boot.initrd.kernelModules = [];
 	boot.kernelModules = ["kvm-amd" "kvm-intel"];
-	boot.kernelParams = [ "acpi_backlight=video" ];
+	boot.kernelParams = ["acpi_backlight=video"];
 	boot.extraModulePackages = [];
 
 	fileSystems."/" = {

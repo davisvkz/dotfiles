@@ -8,9 +8,10 @@
 in {
 	options.profiles.dev.go.enable = lib.mkEnableOption "Go development";
 
-	config = lib.mkIf cfg.enable {
-		home.packages = with pkgs; [
-			go
-		];
-	};
+	config =
+		lib.mkIf cfg.enable {
+			home.packages = with pkgs; [
+				go
+			];
+		};
 }

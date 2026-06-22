@@ -1,4 +1,4 @@
-{ ... }: {
+{...}: {
 	imports = [
 		./settings.nix
 		./identity.nix
@@ -9,5 +9,6 @@
 		./gaming.nix
 		./virtualisation.nix
 		./devtools.nix
+		./chrome-fhs.nix
 	];
 }

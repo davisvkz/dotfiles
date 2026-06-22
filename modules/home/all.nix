@@ -1,4 +1,4 @@
-{ ... }: {
+{...}: {
 	imports = [
 		./cli.nix
 		./dev/core.nix
@@ -26,5 +26,12 @@
 		./apps.nix
 		./apps/winapps.nix
 		./theme.nix
+		./spicetify.nix
+		./secrets.nix
+		./git.nix
+		./neovim.nix
+		./xdg.nix
+		./kdeconnect.nix
+		./shell.nix
 	];
 }

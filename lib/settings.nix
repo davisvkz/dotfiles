@@ -19,6 +19,7 @@
 
 	theme = {
 		palette = "catppuccin-mocha";
+		spicetifyTheme = "catppuccin";
 		spicetifyScheme = "mocha";
 		gtkTheme = "Adwaita-dark";
 		qtStyle = "adwaita-dark";

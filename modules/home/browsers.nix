@@ -8,12 +8,13 @@
 in {
 	options.profiles.browsers.enable = lib.mkEnableOption "Web browsers";
 
-	config = lib.mkIf cfg.enable {
-		home.packages = with pkgs; [
-			firefox
-			firefox-devedition
-			chromium
-			google-chrome
-		];
-	};
+	config =
+		lib.mkIf cfg.enable {
+			home.packages = with pkgs; [
+				firefox
+				firefox-devedition
+				chromium
+				google-chrome
+			];
+		};
 }
