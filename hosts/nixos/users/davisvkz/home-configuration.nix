@@ -15,15 +15,18 @@ in {
 	profiles = {
 		cli.enable = true;
 		dev.enable = true;
-		gaming.enable = true;
-		media.enable = true;
-		security.enable = true;
-		latex.enable = true;
-		chat.enable = true;
+		gaming.enable = false;
+		media.enable = false;
+		security.enable = false;
+		latex.enable = false;
+		chat.enable = false;
 		browsers.enable = true;
 		desktop.enable = true;
 		apps.enable = true;
 	};
+
+	nixpkgs.config.allowUnfree = true;
+	nixpkgs.config.permittedInsecurePackages = ["olm-3.2.16"];
 
 	# ── XDG ─────────────────────────────────────────────────────────────────────
 	xdg = {
