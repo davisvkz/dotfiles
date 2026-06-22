@@ -105,5 +105,5 @@
 		"L+ /opt/google/chrome/chrome - - - - ${pkgs.google-chrome}/bin/google-chrome-stable"
 	];
 
-	system.stateVersion = "25.11";
+	system.stateVersion = "26.05";
 }
