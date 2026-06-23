@@ -11,14 +11,11 @@ in {
 	config =
 		lib.mkIf cfg.enable {
 			home.packages = with pkgs; [
-				# Barra / lançador
-				polybar
-				rofi
+				# Barra / lançador (polybar gerenciado por profiles.polybar, rofi por profiles.rofi)
 				dmenu
 				dunst
 
-				# WM / hotkeys
-				sxhkd
+				# WM / hotkeys (sxhkd gerenciado por profiles.sxhkd)
 				tabbed
 
 				# Controle de tela / X11

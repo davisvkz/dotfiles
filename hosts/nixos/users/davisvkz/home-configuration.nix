@@ -41,6 +41,19 @@
 		xdg.enable = true;
 		kdeconnect.enable = true;
 		shell.enable = true;
+		# CLI / TUI tools
+		tmux.enable = true;
+		btop.enable = true;
+		mpv.enable = true;
+		zathura.enable = true;
+		newsboat.enable = true;
+		wezterm.enable = true;
+		# Desktop / WM
+		rofi.enable = true;
+		bspwm.enable = true;
+		sxhkd.enable = true;
+		polybar.enable = true;
+		wmX11.enable = true;
 	};
 
 	# ── Misc ────────────────────────────────────────────────────────────────────

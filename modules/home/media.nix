@@ -11,8 +11,7 @@ in {
 	config =
 		lib.mkIf cfg.enable {
 			home.packages = with pkgs; [
-				# Vídeo / áudio
-				mpv
+				# Vídeo / áudio (mpv gerenciado por profiles.mpv)
 				vlc
 				ffmpeg-full
 				sox

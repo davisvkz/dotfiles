@@ -11,8 +11,7 @@ in {
 	config =
 		lib.mkIf cfg.enable {
 			home.packages = with pkgs; [
-				# Terminais
-				wezterm
+				# Terminais (wezterm gerenciado por profiles.wezterm)
 				alacritty
 				ghostty
 
@@ -20,10 +19,9 @@ in {
 				zoxide
 				fzf
 				ueberzugpp
-				tmux
+				# tmux gerenciado por profiles.tmux
 
-				# Monitoramento
-				btop
+				# Monitoramento (btop gerenciado por profiles.btop)
 				lshw
 				fastfetch
 				lsof

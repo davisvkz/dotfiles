@@ -19,16 +19,14 @@ in {
 				# Office / documentos
 				libreoffice
 
-				# Leitores de PDF / e-book
+				# Leitores de PDF / e-book (zathura gerenciado por profiles.zathura)
 				evince
-				zathura
 				xreader
 				kdePackages.okular
 				calibre
 				koreader
 
-				# RSS / notícias
-				newsboat
+				# RSS / notícias (newsboat gerenciado por profiles.newsboat)
 				feedr
 				rsshub
 				rsstail

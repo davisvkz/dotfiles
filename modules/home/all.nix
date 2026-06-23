@@ -34,5 +34,18 @@
 		./xdg.nix
 		./kdeconnect.nix
 		./shell.nix
+		# CLI / TUI tools
+		./tmux.nix
+		./btop.nix
+		./mpv.nix
+		./zathura.nix
+		./newsboat.nix
+		./wezterm.nix
+		# Desktop / WM
+		./rofi.nix
+		./bspwm.nix
+		./sxhkd.nix
+		./polybar.nix
+		./wm-x11.nix
 	];
 }

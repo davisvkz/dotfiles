@@ -1,0 +1,29 @@
+#! /bin/sh
+
+pgrep -x sxhkd > /dev/null || sxhkd &
+
+#xrandr --output eDP1 --primary --mode 1920x1080 --pos 195x1080 --rotate normal --right-of HDMI-1 --output HDMI-1 --mode 1366x768 --pos 0x0 --rotate normal
+#xrandr | awk '{if($2=="connected"){i++1;m[i]=$1}if($2=="disconnected"){x+=1;v[x]=$1}}END{for(i in m){if(i==1)o="xrandr --output "m[i]" --auto --primary ";else o=o"--output "m[i]" --auto --right-of "m[(i-1)]" "}for(i in v){o=o"--output "v[i]" --off "}system(o)}'
+#xrandr --output eDP1 --primary --mode 1920x1080 --pos 195x1080 --rotate normal --output HDMI2 --mode 2560x1080 --pos 0x0 --rotate normal 
+xrandr | awk '{if($2=="connected"){i++1;m[i]=$1}}END{for(i in m){system("bspc monitor "m[i]" -d code web game editor files chat music misc")}}'
+xrandr | awk 'BEGIN{while("bspc query -M --names"|getline v){i++;m[i]=v}}{for (i in m){if($2=="disconnected"&&$1==m[i]){system("bspc monitor "m[i]" -r")}}}'
+
+bspc config border_width 2
+bspc config window_gap 2
+
+bspc config split_ratio 0.52
+bspc config borderless_monocle true
+bspc config gapless_monocle true
+bspc config focus_follows_pointer true
+bspc config pointer_follows_monitor true
+
+polybar-msg cmd toggle; bspc config top_padding +0
+
+#AutoStart applications
+mpDris2 &
+picom --config $HOME/.config/picom/picom.conf &
+nitrogen --restore &
+dunst &
+hsetroot -solid "#000000"
+~/.config/polybar/launch.sh &
+feh --no-fehbg --bg-scale '/home/davisvkz/pc/background.jpg'
