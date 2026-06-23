@@ -11,7 +11,7 @@ in {
 	options.profiles.theme.enable = lib.mkEnableOption "Desktop theming (GTK, Qt, dconf, cursor)";
 
 	config =
-		lib.mkIf cfg.enable {
+		lib.mkIf (cfg.enable && osConfig != null) {
 			dconf.enable = true;
 			dconf.settings."org/gnome/desktop/interface" = {
 				color-scheme =

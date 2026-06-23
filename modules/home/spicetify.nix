@@ -14,7 +14,7 @@ in {
 	options.profiles.spicetify.enable = lib.mkEnableOption "Spicetify (Spotify theming)";
 
 	config =
-		lib.mkIf cfg.enable {
+		lib.mkIf (cfg.enable && osConfig != null) {
 			programs.spicetify = {
 				enable = true;
 				enabledExtensions = with spicePkgs.extensions; [

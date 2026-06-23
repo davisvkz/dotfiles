@@ -4,6 +4,7 @@
 	# ── Profiles ────────────────────────────────────────────────────────────────
 	profiles = {
 		cli.enable = true;
+		lf.enable = true;
 		dev = {
 			core.enable = true;
 			js.enable = true;

@@ -9,7 +9,7 @@ in {
 	options.profiles.git.enable = lib.mkEnableOption "Git and GitHub CLI";
 
 	config =
-		lib.mkIf cfg.enable {
+		lib.mkIf (cfg.enable && osConfig != null) {
 			programs.git = {
 				enable = true;
 				settings.user = {

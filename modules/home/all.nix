@@ -1,6 +1,7 @@
 {...}: {
 	imports = [
 		./cli.nix
+		./lf.nix
 		./dev/core.nix
 		./dev/js.nix
 		./dev/python.nix

@@ -17,7 +17,6 @@ in {
 				ghostty
 
 				# Shell / navegação
-				lf
 				zoxide
 				fzf
 				ueberzugpp
