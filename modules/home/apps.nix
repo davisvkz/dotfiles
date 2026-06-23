@@ -50,6 +50,8 @@ in {
 				# Virtualização e Android (userspace)
 				waydroid-helper
 				cage
+				xwayland
+				weston
 				appimage-run
 				fuse
 				android-tools

@@ -9,6 +9,7 @@
 		./dev/go.nix
 		./dev/dotnet.nix
 		./dev/jvm.nix
+		./dev/android.nix
 		./dev/cpp.nix
 		./dev/lua.nix
 		./dev/db.nix

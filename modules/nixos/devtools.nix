@@ -13,6 +13,10 @@ in {
 			programs.nix-ld = {
 				enable = true;
 				libraries = with pkgs; [
+					libpulseaudio
+					libxkbfile
+					libbsd
+					libpng
 					typst
 					nodejs
 					glib

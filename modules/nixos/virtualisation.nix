@@ -10,6 +10,8 @@ in {
 
 	config =
 		lib.mkIf cfg.enable {
+			networking.nftables.enable = true;
+
 			virtualisation = {
 				libvirtd = {
 					enable = true;

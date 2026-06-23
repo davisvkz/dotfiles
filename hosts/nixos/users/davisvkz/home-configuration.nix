@@ -13,6 +13,7 @@
 			go.enable = true;
 			dotnet.enable = true;
 			jvm.enable = true;
+			android.enable = true;
 			cpp.enable = true;
 			lua.enable = true;
 			db.enable = true;
