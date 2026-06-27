@@ -10,9 +10,10 @@ in {
 
 	config =
 		lib.mkIf cfg.enable {
+			programs.obsidian.enable = true;
+
 			home.packages = with pkgs; [
-				# Notas / produtividade
-				obsidian
+				# Notas / produtividade (obsidian gerenciado por programs.obsidian)
 				obsidian-export
 				notion-app-enhanced
 

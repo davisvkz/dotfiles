@@ -10,20 +10,24 @@ in {
 
 	config =
 		lib.mkIf cfg.enable {
-			home.packages = with pkgs; [
-				# Terminais (wezterm gerenciado por profiles.wezterm)
-				alacritty
-				ghostty
+			# Terminais
+			programs.alacritty.enable = true;
+			programs.ghostty.enable = true;
 
-				# Shell / navegação
-				zoxide
-				fzf
+			# Shell / navegação com integração nativa de shell
+			programs.zoxide.enable = true;
+			programs.fzf.enable = true;
+			programs.ripgrep.enable = true;
+
+			# System info
+			programs.fastfetch.enable = true;
+
+			home.packages = with pkgs; [
 				ueberzugpp
 				# tmux gerenciado por profiles.tmux
 
 				# Monitoramento (btop gerenciado por profiles.btop)
 				lshw
-				fastfetch
 				lsof
 				bmon
 				traceroute
@@ -37,7 +41,6 @@ in {
 
 				# Texto / dados
 				gnugrep
-				ripgrep
 				ripgrep-all
 				jq
 				mdq

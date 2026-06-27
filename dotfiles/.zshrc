@@ -13,12 +13,12 @@ print("\n".join(pathlib.Path(p).resolve().as_uri() for p in sys.argv[1:]), end="
 PY
 }
 # pnpm
-export PNPM_HOME="/home/davisvkz/.local/share/pnpm"
+export PNPM_HOME="$HOME/.local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
-export PATH="/home/davisvkz/.cache/.bun/bin:$PATH"
+export PATH="$HOME/.cache/.bun/bin:$PATH"
 # pnpm end
 # Path to your oh-my-zsh installation.
 export ZSH="$XDG_CONFIG_HOME/omz"
@@ -266,7 +266,7 @@ fi
 #
 # eval "$(zoxide init zsh)"
 #
-export PATH="/home/davisvkz/.local/share/cargo/bin:$PATH"
+export PATH="$HOME/.local/share/cargo/bin:$PATH"
 export PATH="$HOME/.local/share/go/bin:$PATH"
 
 

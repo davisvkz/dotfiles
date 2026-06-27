@@ -4,6 +4,7 @@ hosts/*/.omc/
 
 # Neovim LSP log
 hosts/*/users/*/config/nvim/lsp.log
+dotfiles/nvim/lsp.log
 
 # Nix build outputs
 result

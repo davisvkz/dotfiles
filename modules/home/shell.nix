@@ -6,7 +6,7 @@
 	...
 }: let
 	cfg = config.profiles.shell;
-	shell_dir = "${flake}/hosts/nixos/users/davisvkz/config/shell";
+	shell_dir = "${flake}/dotfiles/shell";
 in {
 	options.profiles.shell.enable = lib.mkEnableOption "Shell configuration (zsh, aliases, session variables)";
 
@@ -24,7 +24,7 @@ in {
 				enable = true;
 				# dotDir not overridden: with xdg.enable + stateVersion 26.05 the default
 				# is ~/.config/zsh, so HM exports ZDOTDIR reliably.
-				initContent = lib.mkAfter (builtins.readFile "${flake}/hosts/nixos/users/davisvkz/config/.zshrc");
+				initContent = lib.mkAfter (builtins.readFile "${flake}/dotfiles/.zshrc");
 			};
 
 			# Shell helper files sourced by .zshrc / .zprofile

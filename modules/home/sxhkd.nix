@@ -6,7 +6,7 @@
 	...
 }: let
 	cfg = config.profiles.sxhkd;
-	sxhkd_dir = "${flake}/hosts/nixos/users/davisvkz/config/sxhkd";
+	sxhkd_dir = "${flake}/dotfiles/sxhkd";
 in {
 	options.profiles.sxhkd.enable = lib.mkEnableOption "sxhkd hotkey daemon config";
 

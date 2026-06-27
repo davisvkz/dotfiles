@@ -10,6 +10,8 @@ in {
 
 	config =
 		lib.mkIf cfg.enable {
+			programs.pandoc.enable = true;
+
 			home.packages = with pkgs; [
 				# LaTeX
 				texliveFull
@@ -23,8 +25,7 @@ in {
 				# Alternativas
 				tectonic
 
-				# Conversão / diagrama
-				pandoc
+				# Conversão / diagrama (pandoc gerenciado por programs.pandoc)
 				pandoc-plantuml-filter
 				plantuml-c4
 				graphviz

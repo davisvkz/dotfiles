@@ -10,10 +10,12 @@ in {
 
 	config =
 		lib.mkIf cfg.enable {
+			programs.firefox.enable = true;
+			programs.chromium.enable = true;
+
+			# Variantes sem módulo HM dedicado
 			home.packages = with pkgs; [
-				firefox
 				firefox-devedition
-				chromium
 				google-chrome
 			];
 		};

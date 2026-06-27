@@ -5,8 +5,8 @@
 	...
 }: let
 	cfg = config.profiles.wmX11;
-	dwm_dir = "${flake}/hosts/nixos/users/davisvkz/config/dwm";
-	x11_dir = "${flake}/hosts/nixos/users/davisvkz/config/x11";
+	dwm_dir = "${flake}/dotfiles/dwm";
+	x11_dir = "${flake}/dotfiles/x11";
 in {
 	options.profiles.wmX11.enable = lib.mkEnableOption "X11 WM helpers (dwm autostart, xprofile)";
 

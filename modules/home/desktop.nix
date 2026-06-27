@@ -10,12 +10,14 @@ in {
 
 	config =
 		lib.mkIf cfg.enable {
+			# Notificações via módulo HM
+			services.dunst.enable = true;
+
 			home.packages = with pkgs; [
 				# Barra / lançador (polybar gerenciado por profiles.polybar, rofi por profiles.rofi)
 				dmenu
-				dunst
 
-				# WM / hotkeys (sxhkd gerenciado por profiles.sxhkd)
+				# WM / hotkeys (sxhkd gerenciado por profiles.sxhkd, dunst por services.dunst)
 				tabbed
 
 				# Controle de tela / X11

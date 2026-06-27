@@ -10,15 +10,14 @@ in {
 
 	config =
 		lib.mkIf cfg.enable {
+			programs.vscode.enable = true;
+			programs.lazygit.enable = true;
+
 			home.packages = with pkgs; [
 				# Git
-				lazygit
 				gitkraken
 				github-desktop
 				git-filter-repo
-
-				# Editors / IDEs
-				vscode
 
 				# Nix LSPs
 				nixd

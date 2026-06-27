@@ -1,7 +1,6 @@
 {
 	config,
 	lib,
-	pkgs,
 	...
 }: let
 	cfg = config.profiles.dev.go;
@@ -10,8 +9,6 @@ in {
 
 	config =
 		lib.mkIf cfg.enable {
-			home.packages = with pkgs; [
-				go
-			];
+			programs.go.enable = true;
 		};
 }

@@ -26,4 +26,4 @@ nitrogen --restore &
 dunst &
 hsetroot -solid "#000000"
 ~/.config/polybar/launch.sh &
-feh --no-fehbg --bg-scale '/home/davisvkz/pc/background.jpg'
+feh --no-fehbg --bg-scale "$HOME/pc/background.jpg"

@@ -24,7 +24,7 @@ in {
 			};
 
 			home.file.".config/nvim" = {
-				source = "${flake}/hosts/nixos/users/davisvkz/config/nvim";
+				source = "${flake}/dotfiles/nvim";
 				recursive = true;
 			};
 		};

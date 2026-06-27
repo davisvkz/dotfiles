@@ -17,13 +17,13 @@ in {
 		'';
 
 		# ── Waydroid camera bridge (on-demand) ──────────────────────────────────
-		# Feeds the real webcam (/dev/video0) into the Waydroid loopback device
-		# (/dev/video3) via ffmpeg. No wantedBy = manual start only.
+		# Feeds the OBS virtual camera (/dev/video2) into the Waydroid loopback
+		# device (/dev/video3) via ffmpeg. No wantedBy = manual start only.
 		# Usage: waydroid-camera start | stop
 		systemd.services.waydroid-camera = lib.mkIf config.virtualisation.waydroid.enable {
-			description = "Bridge real webcam (/dev/video0) -> Waydroid loopback (/dev/video3)";
+			description = "Bridge OBS virtual camera (/dev/video2) -> Waydroid loopback (/dev/video3)";
 			serviceConfig = {
-				ExecStart = "${pkgs.ffmpeg}/bin/ffmpeg -f v4l2 -input_format yuyv422 -framerate 30 -video_size 640x480 -i /dev/video0 -pix_fmt yuyv422 -f v4l2 /dev/video3";
+				ExecStart = "${pkgs.ffmpeg}/bin/ffmpeg -f v4l2 -i /dev/video2 -f v4l2 /dev/video3";
 				Restart = "on-failure";
 			};
 		};

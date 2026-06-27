@@ -6,7 +6,7 @@
 	...
 }: let
 	cfg = config.profiles.polybar;
-	polybar_dir = "${flake}/hosts/nixos/users/davisvkz/config/polybar";
+	polybar_dir = "${flake}/dotfiles/polybar";
 in {
 	options.profiles.polybar.enable = lib.mkEnableOption "polybar status bar";
 

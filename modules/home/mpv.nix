@@ -6,7 +6,7 @@
 	...
 }: let
 	cfg = config.profiles.mpv;
-	mpv_dir = "${flake}/hosts/nixos/users/davisvkz/config/mpv";
+	mpv_dir = "${flake}/dotfiles/mpv";
 in {
 	options.profiles.mpv.enable = lib.mkEnableOption "mpv media player";
 

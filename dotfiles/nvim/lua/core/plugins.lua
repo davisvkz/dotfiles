@@ -1,5 +1,5 @@
 --package.path = package.path ..
---";/home/davisvkz/.luarocks/share/lua/5.1/?/init.lua;/home/davisvkz/.luarocks/share/lua/5.1/?.lua;"
+--";$HOME/.luarocks/share/lua/5.1/?/init.lua;$HOME/.luarocks/share/lua/5.1/?.lua;"
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
