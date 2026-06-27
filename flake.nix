@@ -13,6 +13,12 @@
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
 
+		nix-on-droid = {
+			url = "github:nix-community/nix-on-droid";
+			inputs.nixpkgs.follows = "nixpkgs";
+			inputs.home-manager.follows = "home-manager";
+		};
+
 		winapps = {
 			url = "github:winapps-org/winapps";
 			inputs.nixpkgs.follows = "nixpkgs";
