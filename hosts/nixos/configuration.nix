@@ -13,6 +13,7 @@
 	profiles = {
 		desktop.enable = true;
 		audio.enable = true;
+		media.enable = true;
 		gaming.enable = true;
 		virtualisation.enable = true;
 		devtools.enable = true;

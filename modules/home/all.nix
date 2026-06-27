@@ -20,6 +20,7 @@
 		./dev/fun.nix
 		./gaming.nix
 		./media.nix
+		./obs.nix
 		./security.nix
 		./latex.nix
 		./chat.nix

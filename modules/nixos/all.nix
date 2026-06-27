@@ -6,6 +6,7 @@
 		./theme.nix
 		./desktop.nix
 		./audio.nix
+		./media.nix
 		./gaming.nix
 		./virtualisation.nix
 		./devtools.nix

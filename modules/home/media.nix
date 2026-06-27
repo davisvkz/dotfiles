@@ -18,8 +18,7 @@ in {
 				gst_all_1.gstreamer
 				mpdris2
 
-				# Streaming / gravação
-				obs-studio
+				# Streaming / gravação (OBS gerenciado por profiles.obs)
 				obs-do
 				obs-cli
 				obs-cmd

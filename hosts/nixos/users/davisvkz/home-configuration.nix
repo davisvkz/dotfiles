@@ -25,6 +25,7 @@
 		};
 		gaming.enable = true;
 		media.enable = true;
+		obs.enable = true;
 		security.enable = true;
 		latex.enable = true;
 		chat.enable = true;
