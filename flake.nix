@@ -1,7 +1,7 @@
 {
 	description = "My Nixos configuration";
 	inputs = {
-		nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+		nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
 
 		spicetify-nix = {
 			url = "github:Gerg-L/spicetify-nix";
@@ -14,7 +14,7 @@
 		};
 
 		nix-on-droid = {
-			url = "github:nix-community/nix-on-droid";
+			url = "github:nix-community/nix-on-droid/release-24.05";
 			inputs.nixpkgs.follows = "nixpkgs";
 			inputs.home-manager.follows = "home-manager";
 		};
