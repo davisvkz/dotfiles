@@ -8,7 +8,10 @@ in {
 	time.timeZone = id.timezone;
 	environment.etcBackupExtension = ".bak";
 	system.stateVersion = "24.05";
-	nix.extraOptions = "experimental-features = nix-command flakes";
+	nix.extraOptions = ''
+		experimental-features = nix-command flakes
+		sandbox = false
+	'';
 
 	# Shell padrão do usuário
 	user.shell = "${pkgs.zsh}/bin/zsh";
