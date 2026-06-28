@@ -18,6 +18,7 @@
 		virtualisation.enable = true;
 		devtools.enable = true;
 		chromeFhs.enable = true;
+		ssh.enable = true;
 	};
 
 	# ── Networking (host-specific ports) ────────────────────────────────────────

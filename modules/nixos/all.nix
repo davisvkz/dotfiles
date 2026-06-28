@@ -11,5 +11,6 @@
 		./virtualisation.nix
 		./devtools.nix
 		./chrome-fhs.nix
+		./ssh.nix
 	];
 }
